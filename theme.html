@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>       <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>          <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>          <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html lang="en" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{Title}{block:PostTitle} — {PostTitle}{/block:PostTitle}</title>
+    {block:Description}
+    <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+    <meta name="viewport" content="width=device-width">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
+
+    <!-- Default social link text -->
+    <meta name="text:Website Address" content="" />
+    <meta name="text:Blog Address" content="" />
+    <meta name="text:Flickr Username" content="" />
+    <meta name="text:Twitter Username" content="" />
+    <meta name="text:Facebook Username" content="" />
+    <meta name="text:YouTube Username" content="" />
+    <meta name="text:Lastfm Username" content="" />
+    <meta name="text:Delicious Username" content="" />
+    <meta name="text:FriendFeed Username" content="" />
+
+    <!-- Disqus config -->
+    <meta name="text:Disqus Shortname" content="" />
+
+    <!-- Google Analytics -->
+    <meta name="text:Google Analytics ID" content="" />
+
+    <!-- Globals -->
+    <meta name="text:Base Storage URL" content="http://pengxwang.s3.amazonaws.com" />
+    <meta name="text:Blog Storage URL Dev" content="http://dl.dropbox.com/u/305699/tumblr_theme-dev" />
+    <meta name="text:Blog Storage URL" content="http://pengxwang.s3.amazonaws.com/main/blog" />
+
+    <link rel="icon" href="{text:Blog Storage URL}/favicon.ico"/>
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:900,100,500&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+    <!-- Styles -->
+    <link href='{text:Base Storage URL}/css/boilerplate-intro.css' rel='stylesheet' type='text/css' />
+    <link href='{text:Blog Storage URL}/theme.css' rel='stylesheet' type='text/css' />
+    <style type="text/css">
+      {CustomCSS}
+    </style>
+    <link href='{text:Base Storage URL}/css/boilerplate-outro.css' rel='stylesheet' type='text/css' />
+
+    <!-- Early Scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+    <script id="pagination" type="text/x-tpl-html">
+      <nav class="bar">
+        <ol>
+          {block:PreviousPage}
+          <li>
+            <a class="prev button no-span" rel="prev" href="{PreviousPage}">
+              <span class="icon-chevron-left"></span>&nbsp;{lang:Previous}
+            </a>
+          </li>
+          {/block:PreviousPage}
+          {block:NextPage}
+          <li>
+            <a class="next button no-span" rel="next" href="{NextPage}">
+              {lang:Next}&nbsp;<span class="icon-chevron-right"></span>
+            </a>
+          </li>
+          {/block:NextPage}
+        </ol>
+      </nav>
+      <aside class="label">
+        {CurrentPage} / {TotalPages}
+      </aside>
+    </script>
+
+    <script>
+      var disqus_shortname = '{text:Disqus Shortname}';
+    </script>
+
+  </head>
+
+  <body id="{PostID}" class="{TagsAsClasses}">
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <header class="root-header">
+      <section class="banner">
+        <div class="main-content">
+          <h1 class="logo">
+            <a class="ir" href="/">{Title}</a>
+          </h1>
+        </div>
+        <aside class="about">
+          <p>{Description}</p>
+        </aside>
+      </section>
+      <section class="navigation">
+        <div class="main-content">
+          <nav class="page-nav bar">
+            <ol>
+              {block:HasPages}
+              {block:Pages}
+              <li>
+                <a class="button" href="{URL}">
+                  <span data-title="{Label}">{Label}</span>
+                </a>
+              </li>
+              {/block:Pages}
+              {/block:HasPages}
+            </ol>
+          </nav>
+        </div>
+        <aside>
+          <nav class="section-nav bar">
+            <ul>
+              <li>
+                <a class="button" href="/archive/">
+                  <span data-title="{lang:Archive}">{lang:Archive}</span>
+                </a>
+              </li>
+              <li>
+                <a class="button" href="/mobile">
+                  <span data-title="{lang:Mobile}">{lang:Mobile}</span>
+                </a>
+              </li>
+              <li>
+                <a class="button" href="{RSS}">
+                  <span data-title="{lang:RSS}">{lang:RSS}</span>
+                </a>
+              </li>
+              {block:AskEnabled}
+              <li>
+                <a class="button" href="/ask">
+                  <span data-title="{AskLabel}">{AskLabel}</span>
+                </a>
+              </li>
+              {/block:AskEnabled}
+              {block:SubmissionsEnabled}
+              <li>
+                <a class="button" href="/submit">
+                  <span data-title="{SubmitLabel}">{SubmitLabel}</span>
+                </a>
+              </li>
+              {/block:SubmissionsEnabled}
+            </ul>
+          </nav>
+        </aside>
+      </section>
+    </header>
+    <div class="root-body">
+      <div class="inner">
+        <section class="main-content">
+          {block:SearchPage}
+          <header class="search-results">
+            {block:NoSearchResults}
+            <h3 class="result-title">{lang:No search results for SearchQuery 2}.</h3>
+            {/block:NoSearchResults}
+            {block:SearchResults}
+            <h3 class="result-title">{lang:SearchResultCount results for SearchQuery 2}:</h3>
+            {/block:SearchResults}
+          </header>
+          {/block:SearchPage}
+          <ol class="posts">
+            {block:Posts}
+            <li>
+              <article class="post {TagsAsClasses} {PostType}-post">
+                <aside class="meta-info">
+                  <ul class="modules">
+                    {block:Date}
+                    <li class="date">
+                      <a href="{Permalink}">{DayOfMonth} {Month} {Year}</a>
+                    </li>
+                    {/block:Date}
+                    {block:NoteCount}
+                    <li class="note-count">
+                      <a href="{Permalink}">{NoteCountWithLabel}</a>
+                    </li>
+                    {/block:NoteCount}
+                    {block:PermalinkPage}
+                    {block:IfDisqusShortname}
+                    <li class="comments">
+                      <a href="{Permalink}#disqus_thread"></a>
+                    </li>
+                    {/block:IfDisqusShortname}
+                    {/block:PermalinkPage}
+                    {block:SearchPage}
+                    <li class="note-count">
+                      <a href="{Permalink}">{NoteCountWithLabel}</a>
+                    </li>
+                    {/block:SearchPage}
+                    {block:RebloggedFrom}
+                    <li class="reblogged">
+                      {lang:Reblogged from}:
+                      <a href="{ReblogParentURL}">{ReblogRootName}</a>
+                    </li>
+                    {/block:RebloggedFrom}
+                    {block:HasTags}
+                    <li>
+                      <nav class="tags">
+                        <ul>
+                          {block:Tags}
+                          <li>
+                            <a class="button" href="{TagURL}">
+                              <span data-title="{Tag}">{Tag}</span>
+                            </a>
+                          </li>
+                          {/block:Tags}
+                        </ul>
+                      </nav>
+                    </li>
+                    {/block:HasTags}
+                  </ul>
+                </aside>
+                <section class="content">
+                  {block:Regular}
+                  {block:Title}
+                  <h1 class="title"><a href="{Permalink}">{Title}</a></h1>
+                  {/block:Title}
+                  <div class="body">{Body}</div>
+                  {/block:Regular}
+                  <!-- /type -->
+                  {block:Photo}
+                  <figure>
+                    {LinkOpenTag}
+                    <img src="{PhotoURL-500}" alt="{PhotoAlt}" title="{PhotoAlt}">
+                    {LinkCloseTag}
+                    <figcaption>{Caption}</figcaption>
+                  </figure>
+                  {/block:Photo}
+                  <!-- /type -->
+                  {block:Quote}
+                  {block:Title}
+                  <h1 class="title"><a href="{Permalink}">{Title}</a></h1>
+                  {/block:Title}
+                  <div class="body">
+                    <blockquote class="{Length}"><span>{Quote}</span></blockquote>
+                    {block:Source}
+                    <p class="source">&mdash;&nbsp;{Source}</p>
+                    {/block:Source}
+                  </div>
+                  {/block:Quote}
+                  <!-- /type -->
+                  {block:Video}
+                  <div class="video-wrap">{Video-500}</div>
+                  <p class="caption">{Caption}</p>
+                  {/block:Video}
+                  <!-- /type -->
+                  {block:Audio}
+                  <div class="audio-wrap">{AudioPlayerGrey}</div>
+                  <p class="caption">{Caption}</p>
+                  {/block:Audio}
+                  <!-- /type -->
+                  {block:Link}
+                  <h2 class="title"><a href="{URL}" {Target}>{Name}</a>&nbsp;&rarr;</h2>
+                  {block:Description}
+                  <p class="body">{Description}</p>
+                  {/block:Description}
+                  {/block:Link}
+                  <!-- /type -->
+                  {block:Conversation}
+                  {block:Title}
+                  <h1 class="title"><a href="{Permalink}">{Title}</a></h1>
+                  {/block:Title}
+                  <ol class="body">
+                    {block:Lines}
+                    <li>
+                      {block:Label}
+                      <span class="handle">{Label}</span>
+                      {/block:Label}
+                      <span class="message">{Line}</span>
+                    </li>
+                    {/block:Lines}
+                  </ol>
+                  {/block:Conversation}
+                  {block:More}
+                  <p>
+                    <a class="button" href="{Permalink}" title="Follow permalink">
+                      <span data-title="Read more &hellip;">Read more &hellip;</span>
+                    </a>
+                  </p>
+                  {/block:More}
+                </section>
+              </article>
+            </li>
+            {/block:Posts}
+          </ol>
+          {block:PermalinkPage}
+          <section class="feedback">
+            {block:PostNotes}
+            <section class="notes">
+              <h3 class="title">
+                {lang:Notes}
+              </h3>
+              <ol class="body">
+                {PostNotes}
+              </ol>
+            </section>
+            {/block:PostNotes}
+            <!-- /type -->
+            {block:IfDisqusShortname}
+            <section class="comments">
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = '//'+ disqus_shortname +'.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+              </script>
+              <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">{lang:View the discussion thread}.</a></noscript>
+              <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </section>
+            {/block:IfDisqusShortname}
+          </section>
+          {/block:PermalinkPage}
+          <!-- /section -->
+          {block:Pagination}
+          <footer class="pagination" data-tpl="pagination"></footer>
+          {/block:Pagination}
+        </section>
+        <section class="side-content">
+          <ol class="modules">
+            {block:Pagination}
+            <li class="pagination" data-tpl="pagination"></li>
+            {/block:Pagination}
+            <li>
+              <form class="search" role="search" method="get" action="/search">
+                <div class="field required input">
+                  <input type="text" name="q" value="{SearchQuery}"/>
+                </div>
+                <button id="searchsubmit" type="submit">
+                  <span data-title="{lang:Search}">{lang:Search}</span>
+                </button>
+              </form>
+            </li>
+            <li class="social">
+              <h3 class="title">Elsewhere</h3>
+              <nav class="bar">
+                <ul>
+                  {block:IfWebsiteAddress}
+                  <li><a class="button no-span icon-home" href="{text:Website Address}" title="Website"></a></li>
+                  {/block:IfWebsiteAddress}
+                  {block:IfTwitterUsername}
+                  <li><a class="button no-span icon-twitter" href="http://www.twitter.com/{text:Twitter Username}" title="Twitter"></a></li>
+                  {/block:IfTwitterUsername}
+                  {block:IfFacebookUsername}
+                  <li><a class="button no-span icon-facebook" href="http://www.facebook.com/{text:Facebook Username}" title="Facebook"></a></li>
+                  {/block:IfFacebookUsername}
+                  {block:IfFlickrUsername}
+                  <li><a class="button no-span icon-camera" href="http://www.flickr.com/photos/{text:Flickr Username}" title="Flickr"></a></li>
+                  {/block:IfFlickrUsername}
+                  {block:IfYouTubeUsername}
+                  <li><a class="button no-span icon-film" href="http://www.youtube.com/user/{text:YouTube Username}" title="YouTube"></a></li>
+                  {/block:IfYouTubeUsername}
+                  {block:IfLastfmUsername}
+                  <li><a class="button no-span icon-music" href="http://www.last.fm/user/{text:Lastfm Username}" title="Last.fm"></a></li>
+                  {/block:IfLastfmUsername}
+                </ul>
+              </nav>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </div>
+    <footer class="root-footer">
+      <div class="inner">
+        <section class="main-content">
+          &copy; {CopyrightYears} Peng X Wang<br/>
+          <span class="colophon">
+            Theme built in SCSS and CoffeeScript.
+            Assets are stored in S3.<br/>
+            Fonts from GWF: Bitter, Roboto, and Source Code Pro.
+            Icons from FontAwesome.
+          </span>
+        </section>
+        <aside>
+        </aside>
+      </div>
+    </footer>
+    <!-- Ready Scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/2.1.07/jquery.masonry.min.js"></script>
+    <script>
+    if (typeof Tumblr == 'undefined')
+    {
+      document.write(unescape("%3Cscript src='//assets.tumblr.com/javascript/tumblelog.js' %3E%3C/script%3E"));
+    }
+    </script>
+    <script src="{text:Blog Storage URL}/theme.js"></script>
+    {block:IfDisqusShortname}
+    <script type="text/javascript">
+    (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    </script>
+    {/block:IfDisqusShortname}
+    {block:IfGoogleAnalyticsID}
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '{text:Google Analytics ID}']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    {/block:IfGoogleAnalyticsID}
+  </body>
+</html>

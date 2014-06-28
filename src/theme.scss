@@ -1,0 +1,778 @@
+@import "../lib/custom/mixins.scss";
+
+$_weight: '#html';
+$_headings: 'h1, h2, h3, h4, h5, h6';
+$_root: 'http://pengxwang.s3.amazonaws.com/main/blog';
+
+$base-line:     14px;
+$base-lead:     22px;
+$ribbon-size:   6px;
+$radius-size:   4px;
+$gutter-size:   $base-lead * 2;
+$frame-size:    5px;
+$meta-size:     12px;
+$g-gutter-size: $base-line; // Grid.
+$f-gutter-size: 13px; // Root footer.
+
+$width-1:       980px;
+
+$white-1:       #f1f1f1;
+$white-2:       #f8f8f8;
+$black-1:       #221;
+$blue-1:        #06f;
+$blue-1-lt:     #08f;
+$blue-1-dk:     #05d;
+$blue-2:        #ace;
+$blue-2-lt:     #def;
+$gray-lt-1:     #aaa;
+$gray-lt-2:     #999;
+$gray-lt-3:     #e8e8e8;
+$gray-lt-4:     #eee;
+$gray-dk-1:     #333;
+$gray-dk-2:     #444;
+$gray-dk-3:     #777;
+
+%type-copy {
+  font: normal #{$base-line}/#{$base-lead} "Bitter", Georgia, serif;
+  word-spacing: 1px;
+}
+%type-copy-meta {
+  font-size: $meta-size;
+  opacity: 0.6;
+}
+%type-heading {
+  font: {
+    family: "Roboto", Helvetica, Arial, sans-serif;
+    weight: 500;
+  }
+  .no-fontface & {
+    font-weight: bold;
+  }
+  line-height: 1.2em;
+}
+%type-code {
+  font: normal 1em "Source Code Pro", Inconsolata, Consolas, sans-serif;
+}
+%type-quoted {
+  $size: 1em;
+  @mixin shared {
+    display: block;
+    position: relative;
+    opacity: 0.2;
+    font: { size: 4em; weight: 700; }
+    .no-fontface & { font-weight: bold; }
+  }
+  margin: { top: -$size; bottom: -$size; }
+  &::before {
+    content: open-quote;
+    @include shared;
+    top: $size * 0.6; left: -$size * 0.6;
+  }
+  &::after {
+    content: close-quote;
+    @include shared;
+    top: -$size * 0.2; left: 100%;
+  }
+}
+%type-link {
+  @include transition(color);
+  color: $blue-1;
+  font-weight: 500;
+  text-decoration: none;
+  .body &, nav & {
+    text-shadow: 0 1px $w-f;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    color: $blue-1-lt;
+  }
+}
+%type-control {
+  font: {
+    family: "Roboto", Helvetica, Arial, sans-serif;
+    weight: 500;
+  }
+  .no-fontface & {
+    font-weight: bold;
+  }
+  line-height: 1.2em;
+}
+%type-glyph {
+  font-family: FontAwesome;
+  line-height: 1;
+  text-decoration: none;
+}
+
+%layout-content-box {
+  p:first-child { margin-top: 0; }
+  p:last-child { margin-bottom: 0; }
+  li { display: list-item; }
+  ol li { list-style: decimal outside; }
+  ul li { list-style: square outside; }
+}
+%layout-page-slice {
+  margin-bottom: $base-lead * 2;
+}
+%layout-wrapper-slice {
+  margin: { left: auto; right: auto; }
+  position: relative;
+}
+%layout-box-slice {
+  margin: { top: $base-lead; bottom: $base-lead; }
+}
+%layout-row {
+  display: block;
+  margin-bottom: $base-line;
+}
+%layout-columns {
+  @extend %clearfix;
+  position: relative;
+}
+%layout-column {
+  float: left;
+  position: relative;
+  margin-right: $gutter-size;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+%layout-box-list {
+  >li {
+    @extend %layout-row;
+    list-style: none;
+    >a {
+      display: inline-block;
+    }
+  }
+}
+%layout-bar-list {
+  @extend %layout-columns;
+  >li {
+    float: left;
+    list-style: none;
+    &, >a {
+      display: block;
+    }
+  }
+}
+%layout-meta-list {
+  >li {
+    list-style: none;
+  }
+}
+%layout-grid {
+  @extend %clearfix;
+  display: block;
+}
+%layout-grid-item {
+  float: left;
+  display: block;
+  margin: { right: $g-gutter-size; bottom: $g-gutter-size; }
+}
+
+%stationery-ruled {
+  @include linear-gradient($gray-lt-3 1px, transparent 1px);
+  display: block;
+  background: {
+    repeat: repeat;
+    size: $base-lead $base-lead;
+    position: 0 $base-lead;
+  }
+}
+%stationery-ruled-list {
+  >li:not(:first-child) {
+    border-top: 1px solid $gray-lt-3;
+  }
+}
+%stationery-inverted {
+  background: $blue-1-dk;
+  color: $white-2;
+}
+%stationery-screen {
+  @include box-shadow(0 2px $base-line $b-1, 0 1px 3px $b-1,
+                      inset 0 0 0 1px $w-3);
+  background: $blue-2-lt;
+  border: 1px solid $blue-2;
+}
+
+%chrome-field {
+  $padding: 5px;
+  $weight: 2px;
+  $height: 10px;
+  $color: rgba($gray-dk-3, 0.3);
+  input {
+    border: 0;
+    background: transparent;
+    padding: $padding ($padding * 2);
+    &:focus {
+      outline: 0;
+    }
+    border-bottom: $weight solid $color;
+  }
+  &::before, &::after {
+    content: "\0020";
+    height: $height;
+    width: $weight;
+    display: block;
+    position: relative;
+    background: $color;
+  }
+  &::before {
+    bottom: -28px;
+  }
+  &::after {
+    top: -$height;
+    left: 99%;
+  }
+}
+@mixin chrome-button ($bg-clr, $bg-clr-on, $fg-clr, $fg-clr-on, $offset:3px, $padding:5px) {
+  $is-inverted: lightness($bg-clr) < 70%;
+  $inset-clr: if($is-inverted, $w-2, $w-3);
+  $shade-amp: if($is-inverted, 15%, 20%);
+  $shade-height: 2px;
+  @include border-radius($radius-size);
+  @include box-shadow(inset 0 0 0 1px $inset-clr, // Overall bevel highlight.
+                      inset 0 1px $inset-clr, // Top bevel highlight.
+                      0 $shade-height darken($bg-clr, $shade-amp), // Bottom side shadow.
+                      0 4px 3px $b-1); // Casted shadow.
+  @include simple-gradient($clear, $b-1);
+  @include transition(background-color color);
+  @include text-inset($w-5, $b-5, $fg-clr, $offset);
+  &.no-span {
+    text-shadow: 0 1px $w-f;
+    color: $fg-clr;
+  }
+  background-color: $bg-clr;
+  cursor: pointer;
+  padding: $padding ($padding * 2);
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  border: { width: 1px; style: solid; color: darken($bg-clr, 15%) darken($bg-clr, 20%) darken($bg-clr, 30%); }
+  margin: { top: 0; bottom: $shade-height; }
+  &:hover, &:focus {
+    background-color: $bg-clr-on;
+    &.no-span, >span::before {
+      color: $fg-clr-on; // Otherwise won't work due to text-inset.
+    }
+  }
+  &:active {
+    margin: { top: $shade-height; bottom: 0; }
+    z-index: 2;
+    @include box-shadow(inset 0 1px $inset-clr, // Top bevel highlight.
+                        inset 0 -1px 1px $b-1, // Bottom shadow from depression.
+                        inset 1px 0 $b-1, inset -1px 0 $b-1, // Side shadows from depression.
+                        0 1px $w-5); // Hole's edge highlight.
+  }
+}
+%chrome-button {
+  @include chrome-button($gray-lt-4, $white-2, $gray-dk-3, $blue-1-lt, 2px);
+}
+%chrome-button-inverted {
+  @include chrome-button($blue-1, $blue-1-lt, $blue-2-lt, $w-f);
+}
+%chrome-segmented {
+  >li:not(:first-child)>a {
+    @include border-side-radius(left, 0);
+  }
+  >li:not(:last-child)>a {
+    @include border-side-radius(right, 0);
+    border-right-width: 0;
+  }
+}
+%chrome-frame {
+  @include box-shadow(0 5px $base-lead $b-1, 0 5px 5px $b-1,
+                      inset 0 0 0 1px $w-3, inset 0 0 3px $frame-size $w-8);
+  border: 1px solid;
+  border-color: $gray-lt-1;
+  background: $b-f;
+  padding: $frame-size;
+}
+%chrome-frame-selectable {
+  @extend %chrome-frame;
+  @include transition(border-color);
+  cursor: pointer;
+  &:hover {
+    padding: 0;
+    border: { width: $frame-size + 1px; color: $blue-1-dk; }
+  }
+}
+%chrome-ruled {
+  @include box-shadow(inset 0 -1px $b-1, 0 1px $w-f);
+}
+%chrome-inline-token {
+  background: $blue-2-lt;
+  padding: 0 0.3em;
+  border-bottom: 1px solid $blue-2;
+}
+%chrome-overlay {
+  @include box-shadow(0 1px 2px $b-3, inset 0 0 0 1px $w-1);
+  color: $w-8;
+  background: rgba($gray-lt-2, 0.3);
+  border: 1px solid $b-3;
+}
+
+%transition-fading {
+  @include transition(opacity);
+}
+%behavior-fading {
+  @extend %transition-fading;
+  opacity: 1;
+  &.invisible {
+    opacity: 0;
+  }
+}
+
+$_fontawesome-path: '#{$_root}/../font';
+@import "../lib/custom/fontawesome-bare.scss";
+
+body {
+  @extend %type-copy;
+  background: $white-1 url(#{$_root}/gradient.jpg) 0 -50px repeat-x fixed;
+  border-top: $ribbon-size solid $blue-1-dk;
+  color: $black-1;
+  // Grid.
+  $true-width: 500px;
+  $meta-width: 160px;
+  $push-width: $meta-width + $gutter-size;
+  $full-width: $width-1;
+  $main-width: $true-width + $meta-width + $gutter-size;
+  $side-width: $full-width - $main-width - $gutter-size;
+  >.root-header {
+    >section {
+      @extend %layout-wrapper-slice;
+      @extend %layout-columns;
+      width: $full-width;
+      >.main-content {
+        @extend %layout-column;
+        width: $main-width;
+        padding-left: $push-width;
+      }
+      >aside {
+        @extend %layout-column;
+        width: $side-width;
+      }
+    }
+  }
+  >.root-body {
+    >.inner {
+      @extend %layout-wrapper-slice;
+      @extend %layout-columns;
+      width: $full-width;
+      >.main-content {
+        @extend %layout-column;
+        width: $main-width;
+        article {
+          @extend %layout-columns;
+          >aside {
+            @extend %layout-column;
+            width: $meta-width;
+          }
+          >.content {
+            @extend %layout-column;
+            width: $true-width;
+            .p_image_embed {
+              $size: $base-lead * 4;
+              $num-per-row: floor(($true-width + $g-gutter-size) / ($size + $g-gutter-size));
+              @extend %layout-grid;
+              img {
+                @extend %layout-grid-item;
+                width: $size;
+                &:nth-child(#{$num-per-row}n) {
+                  margin-right: 0;
+                }
+              }
+            }
+          }
+        }
+        >.feedback,
+        >footer {
+          >* {
+            margin-left: $push-width;
+          }
+          &::before {
+            @extend %chrome-ruled;
+            content: " ";
+            display: block;
+            height: 2px;
+          }
+        }
+      }
+      >.side-content {
+        @extend %layout-column;
+        width: $side-width;
+        .search {
+          >.field>input {
+            width: $side-width - 80px;
+          }
+          >button {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+  >.root-footer {
+    >.inner {
+      @extend %layout-wrapper-slice;
+      @extend %layout-columns;
+      width: $full-width;
+      >.main-content {
+        @extend %layout-column;
+        width: $main-width;
+        padding-left: $push-width;
+        @media only screen and (max-width: $width-1) {
+          padding-left: $push-width - $f-gutter-size;
+        }
+      }
+      >aside {
+        @extend %layout-column;
+        width: $side-width;
+      }
+    }
+  }
+}
+
+.root-header {
+  @extend %chrome-ruled;
+  border-top: 1px solid darken($blue-1-dk, 20%);
+  margin-bottom: $base-lead;
+  padding: { top: $base-lead; bottom: $base-lead; }
+}
+.banner {
+  .about {
+    @extend %type-copy-meta;
+    max-height: $base-lead * 4;
+    overflow: hidden;
+    padding-right: $base-line;
+  }
+  .logo {
+    .ir {
+      $height: 104px;
+      display: block;
+      width: 500px;
+      height: $height;
+      background-image: url(#{$_root}/banner-logo-sprite.png);
+      &:hover {
+        background-position: 0 (-$height);
+      }
+    }
+  }
+}
+
+.root-footer {
+  @extend %stationery-inverted;
+  @include border-side-radius(top, $radius-size);
+  @include box-shadow(inset -1px 0 $w-3, inset 1px 0 $w-3,
+                      inset 0 1px $w-5,
+                      inset 0 (-$base-line) $base-lead 5px $b-2,
+                      0 5px 10px $b-2);
+  border: 1px solid;
+  border-color: $b-1 $b-2;
+  padding: { top: $base-lead; bottom: $base-lead * 2; }
+  margin: ($base-lead * 2) $f-gutter-size;
+  margin-bottom: 0;
+  text-shadow: 0 -1px $b-f;
+  .colophon {
+    @extend %type-copy-meta;
+  }
+}
+
+#{$_headings} {
+  @extend %type-heading;
+  color: $gray-dk-2;
+  margin-bottom: 0.15em;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=hIEfix.png,sizingMethod=crop);
+  zoom: 1;
+  text-shadow: 0 1px $b-f;
+}
+h1, %type-h1 {
+  letter-spacing: -0.02em;
+}
+h2, %type-h2 {
+  letter-spacing: -0.02em;
+}
+$h_sizes: 34px 24px 20px 18px 16px;
+$h_leads: 44px 33px 22px 22px 22px;
+@for $i from 1 through 5{
+  #{h}#{$i}, %type-h#{$i} {
+    margin: 0;
+    font-size: nth($h_sizes, $i);
+    line-height: nth($h_leads, $i);
+  }
+}
+
+ul, ol {
+  margin-left: 0;
+  padding-left: 0;
+  nav:not(.bar) > &,
+  &.posts, &.modules {
+    @extend %layout-box-list;
+  }
+  &.posts, &.modules {
+    >li:not(:last-child) {
+      @extend %chrome-ruled;
+      padding-bottom: $base-line;
+    }
+  }
+  nav.bar > & {
+    @extend %layout-bar-list;
+    @extend %chrome-segmented;
+  }
+}
+
+// Post content.
+p {
+  @extend %layout-box-slice;
+  word-spacing: 2px;
+  &[data-annotation]{
+    &::after {
+      @extend %type-copy-meta;
+      content: attr(data-annotation);
+      display: block;
+      margin-top: $base-line;
+      text-align: right;
+    }
+    li > & {
+      text-align: right;
+      > img { display: inline-block; }
+    }
+  }
+}
+pre {
+  @extend %layout-box-slice;
+  @extend %type-code;
+  @extend %stationery-screen;
+  padding: $base-line;
+}
+code {
+  @extend %type-code;
+  margin: 0;
+  padding: 0;
+  p & {
+    @extend %chrome-inline-token;
+  }
+}
+.blockquote {
+  @extend %type-quoted;
+  @extend %type-h4;
+  @extend %layout-content-box;
+  $lead: round(1.5 * nth($h_sizes, 4));
+  line-height: $lead;
+  word-spacing: 3px;
+  margin: { left: auto; right: auto; }
+  padding: 0;
+  span {
+    @extend %stationery-ruled;
+    padding-top: 0.3em;
+    background: {
+      size: $lead $lead;
+      position: 0 $lead;
+    }
+  }
+  +p:last-child {
+    margin-top: 0;
+  }
+}
+blockquote {
+  @extend .blockquote;
+}
+object,
+img.framed {
+  @extend %chrome-frame;
+  display: block;
+  .content & {
+    max-width: 100%;
+  }
+}
+.has-expandable {
+  position: relative;
+  cursor: pointer;
+  $size: $base-line;
+  &::before {
+    @extend %chrome-overlay;
+    @extend %type-glyph;
+    @extend %transition-fading;
+    content: "\f0b2";
+    position: absolute;
+    width: $size; height: $size;
+    bottom: $size; left: $size;
+    padding: $size / 2; border-radius: $size / 2;
+    text-align: center;
+    opacity: 0.2;
+    .content:hover & {
+      opacity: 1;
+    }
+  }
+  &[data-annotation]::before {
+    bottom: $size + ($base-lead + $base-line);
+  }
+  >img {
+    @extend %chrome-frame-selectable;
+  }
+}
+.posts {
+  ul, ol {
+    @extend %layout-box-slice;
+  }
+  >li {
+    @extend %layout-page-slice;
+  }
+}
+dl {
+  margin-top: $base-lead;
+  dd {
+    margin-bottom: $base-lead;
+  }
+}
+
+a:not(.button) {
+  @extend %type-link;
+}
+
+.field {
+  display: inline-block;
+  &.input {
+    @extend %chrome-field;
+  }
+}
+input[type='submit'],
+.button {
+  @extend %type-control;
+  @extend %chrome-button;
+  &>span[class^=icon] {
+    vertical-align: middle;
+  }
+}
+button {
+  @extend %type-control;
+  @extend %chrome-button;
+  margin: 0;
+  overflow: visible;
+}
+.modules {
+  >li {
+    >.title {
+      margin-bottom: $base-lead;
+    }
+  }
+}
+.post {
+  >.meta-info {
+    text-align: right;
+    padding-top: $base-lead;
+    .date {
+      font-style: italic;
+      >a {
+        color: $gray-dk-3;
+      }
+    }
+    .tags {
+
+    }
+  }
+  >.content {
+    .title {
+      margin-bottom: $base-line;
+    }
+    .body {
+
+    }
+  }
+}
+.quote-post,
+.text-post {
+  >.content {
+    @extend %layout-box-slice;
+    >.body {
+      @extend %layout-content-box;
+    }
+  }
+}
+.photo-post {
+  >.content {
+    >figure img {
+      @extend %chrome-frame;
+    }
+  }
+}
+.video-post {
+
+}
+.audio-post {
+
+}
+.link-post {
+
+}
+.chat-post {
+  >.content {
+    $handle-width: 100px;
+    >ol.body {
+      @extend %layout-meta-list;
+      @extend %stationery-ruled-list;
+      >li {
+        @extend %layout-columns;
+        >span {
+          display: block;
+        }
+        >.handle {
+          @extend %default-truncated-text;
+          color: $gray-lt-1;
+          float: left;
+          text-align: right;
+          width: $handle-width;
+        }
+        >.message {
+          display: block;
+          padding-left: $handle-width + $base-line;
+        }
+      }
+    }
+  }
+}
+
+.p_image_embed {
+  @extend %behavior-fading;
+  img {
+    @extend %chrome-frame-selectable;
+  }
+  &:first-child {
+    margin-top: $base-line;
+  }
+}
+
+.pagination {
+  @extend %clearfix;
+  >* {
+    display: block;
+  }
+  .bar {
+    float: left;
+    ul, ol {
+      margin: { top: 0; bottom: 0; }
+    }
+  }
+  .label {
+    @extend %type-copy-meta;
+    float: right;
+    line-height: 30px;
+    margin-right: 10px;
+  }
+  .main-content &>* {
+    margin: { top: $base-lead; bottom: $base-lead; }
+  }
+}
+
+.feedback>section {
+  margin-top: $base-lead * 2;
+}
+
+.side-content {
+  .social {
+    >.bar .button {
+      width: 38px;
+    }
+  }
+}
