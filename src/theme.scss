@@ -238,7 +238,7 @@ $gray-dk-3:     #777;
                       0 4px 3px $b-1); // Casted shadow.
   @include simple-gradient($clear, $b-1);
   @include transition(background-color color);
-  @include text-inset($w-5, $b-5, $fg-clr, $offset);
+  @include text-inset($w-5, $clear, $fg-clr, $offset);
   &.no-span {
     text-shadow: 0 1px $w-f;
     color: $fg-clr;
