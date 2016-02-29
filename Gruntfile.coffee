@@ -13,16 +13,6 @@ module.exports = (grunt) ->
         src: 'release/**/*.css'
         ext: '.css'
         extDot: 'last'
-    bower:
-      install:
-        options:
-          cleanBowerDir: yes
-          cleanTargetDir: no
-          copy: yes
-          install: yes
-          layout: (type, component) -> type # Just the file.
-          targetDir: './lib'
-          verbose: yes
     bump:
       options:
         files: [
@@ -75,14 +65,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks plugin for plugin in matchdep.filterDev 'grunt-*'
 
   grunt.registerTask 'default', [
-    'lib'
     'release'
     'watch'
-  ]
-
-  grunt.registerTask 'lib', [
-    'clean:lib'
-    'bower'
   ]
 
   grunt.registerTask 'release', [

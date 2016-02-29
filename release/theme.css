@@ -62,15 +62,14 @@ pre, code {
       font-weight: bold; }
 
 a:not(.button) {
-  -webkit-transition: color 0.3s ease-in-out;
   transition: color 0.3s ease-in-out;
-  color: #0066ff;
+  color: #06f;
   font-weight: 500;
   text-decoration: none; }
   .body a:not(.button), nav a:not(.button) {
     text-shadow: 0 1px white; }
   a:hover:not(.button), a:focus:not(.button), a:active:not(.button) {
-    color: #0088ff; }
+    color: #08f; }
 
 input[type='submit'],
 .button, button {
@@ -153,7 +152,6 @@ body > .root-body > .inner > .main-content article > .content .p_image_embed img
   margin-bottom: 14px; }
 
 .blockquote span, blockquote span {
-  background-image: -webkit-linear-gradient(#e8e8e8 1px, transparent 1px);
   background-image: linear-gradient(#e8e8e8 1px, transparent 1px);
   display: block;
   background-repeat: repeat;
@@ -164,13 +162,13 @@ body > .root-body > .inner > .main-content article > .content .p_image_embed img
   border-top: 1px solid #e8e8e8; }
 
 .root-footer {
-  background: #0055dd;
+  background: #05d;
   color: #f8f8f8; }
 
 pre {
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  background: #ddeeff;
-  border: 1px solid #aaccee; }
+  background: #def;
+  border: 1px solid #ace; }
 
 .field.input input {
   border: 0;
@@ -197,7 +195,6 @@ input[type='submit'],
   border-radius: 4px;
   background-clip: border-box;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), inset 0 1px rgba(255, 255, 255, 0.3), 0 2px #bbbbbb, 0 4px 3px rgba(0, 0, 0, 0.1);
-  background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
   background-image: linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
   -moz-transition-property: background-color, color;
   -moz-transition-duration: 0.3s;
@@ -211,14 +208,11 @@ input[type='submit'],
   -ms-transition-property: background-color, color;
   -ms-transition-duration: 0.3s;
   -ms-transition-timing-function: ease-in-out;
-  -webkit-transition-property: background-color, color;
-          transition-property: background-color, color;
-  -webkit-transition-duration: 0.3s;
-          transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-in-out;
-          transition-timing-function: ease-in-out;
+  transition-property: background-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #eeeeee;
+  background-color: #eee;
   cursor: pointer;
   padding: 5px 10px;
   text-align: center;
@@ -242,13 +236,13 @@ input[type='submit'],
       height: 100%;
       top: 0;
       left: 0;
-      color: #777777;
+      color: #777;
       text-shadow: none;
       top: 2px; }
   input.no-span[type='submit'],
   .no-span.button, button.no-span {
     text-shadow: 0 1px white;
-    color: #777777; }
+    color: #777; }
   input[type='submit']:hover,
   .button:hover, button:hover, input[type='submit']:focus,
   .button:focus, button:focus {
@@ -258,7 +252,7 @@ input[type='submit'],
     .button:hover > span::before, button:hover > span::before, input[type='submit']:focus.no-span,
     .button:focus.no-span, button:focus.no-span, input[type='submit']:focus > span::before,
     .button:focus > span::before, button:focus > span::before {
-      color: #0088ff; }
+      color: #08f; }
   input[type='submit']:active,
   .button:active, button:active {
     margin-top: 2px;
@@ -282,27 +276,26 @@ nav.bar > ul > li:not(:last-child) > a, nav.bar > ol > li:not(:last-child) > a {
 img.framed, .photo-post > .content > figure img {
   box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1), 0 5px 5px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.3), inset 0 0 3px 5px rgba(255, 255, 255, 0.8);
   border: 1px solid;
-  border-color: #aaaaaa;
+  border-color: #aaa;
   background: black;
   padding: 5px; }
 
 .has-expandable > img, .p_image_embed img {
-  -webkit-transition: border-color 0.3s ease-in-out;
   transition: border-color 0.3s ease-in-out;
   cursor: pointer; }
   .has-expandable > img:hover, .p_image_embed img:hover {
     padding: 0;
     border-width: 6px;
-    border-color: #0055dd; }
+    border-color: #05d; }
 
 body > .root-body > .inner > .main-content > .feedback::before,
 body > .root-body > .inner > .main-content > footer::before, .root-header, ul.posts > li:not(:last-child), ul.modules > li:not(:last-child), ol.posts > li:not(:last-child), ol.modules > li:not(:last-child) {
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1), 0 1px white; }
 
 p code {
-  background: #ddeeff;
+  background: #def;
   padding: 0 0.3em;
-  border-bottom: 1px solid #aaccee; }
+  border-bottom: 1px solid #ace; }
 
 .has-expandable::before {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -311,7 +304,6 @@ p code {
   border: 1px solid rgba(0, 0, 0, 0.3); }
 
 .p_image_embed, .has-expandable::before {
-  -webkit-transition: opacity 0.3s ease-in-out;
   transition: opacity 0.3s ease-in-out; }
 
 .p_image_embed {
@@ -1101,8 +1093,8 @@ p code {
 
 body {
   background: #f1f1f1 url(http://pengxwang.s3.amazonaws.com/main/blog/gradient.jpg) 0 -50px repeat-x fixed;
-  border-top: 6px solid #0055dd;
-  color: #222211; }
+  border-top: 6px solid #05d;
+  color: #221; }
   body > .root-header > section {
     width: 980px; }
     body > .root-header > section > .main-content {
@@ -1180,7 +1172,7 @@ body {
   text-shadow: 0 -1px black; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+  color: #444;
   margin-bottom: 0.15em;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=hIEfix.png,sizingMethod=crop);
   zoom: 1;
@@ -1306,14 +1298,14 @@ button {
   .post > .meta-info .date {
     font-style: italic; }
     .post > .meta-info .date > a {
-      color: #777777; }
+      color: #777; }
 .post > .content .title {
   margin-bottom: 14px; }
 
 .chat-post > .content > ol.body > li > span {
   display: block; }
 .chat-post > .content > ol.body > li > .handle {
-  color: #aaaaaa;
+  color: #aaa;
   float: left;
   text-align: right;
   width: 100px; }
