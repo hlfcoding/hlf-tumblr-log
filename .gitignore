@@ -1,1 +1,3 @@
+*.map
+*.sublime-workspace
 node_modules
