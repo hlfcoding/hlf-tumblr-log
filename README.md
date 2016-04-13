@@ -1,6 +1,9 @@
 # HLF Tumblr Log Theme
 
-:scroll: A light Tumblr blog theme with quality UI.
+[![Code Climate](https://codeclimate.com/github/hlfcoding/hlf-tumblr-log/badges/gpa.svg)](https://codeclimate.com/github/hlfcoding/hlf-tumblr-log)
+
+> :scroll: A light Tumblr blog theme with quality UI.
+
 
 ## Usage
 
