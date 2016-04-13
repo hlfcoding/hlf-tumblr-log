@@ -75,10 +75,10 @@ $gray-dk-3:     #777;
   }
 }
 %type-link {
-  @include transition(color);
   color: $blue-1;
   font-weight: 500;
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
   .body &, nav & {
     text-shadow: 0 1px $w-f;
   }
@@ -172,9 +172,9 @@ $gray-dk-3:     #777;
 }
 
 %stationery-ruled {
-  @include linear-gradient($gray-lt-3 1px, transparent 1px);
   display: block;
   background: {
+    image: linear-gradient($gray-lt-3 1px, transparent 1px);
     repeat: repeat;
     size: $base-lead $base-lead;
     position: 0 $base-lead;
@@ -190,10 +190,13 @@ $gray-dk-3:     #777;
   color: $white-2;
 }
 %stationery-screen {
-  @include box-shadow(0 2px $base-line $b-1, 0 1px 3px $b-1,
-                      inset 0 0 0 1px $w-3);
   background: $blue-2-lt;
   border: 1px solid $blue-2;
+  box-shadow: (
+    0 2px $base-line $b-1,
+    0 1px 3px $b-1,
+    inset 0 0 0 1px $w-3
+  );
 }
 
 %chrome-field {
@@ -231,23 +234,27 @@ $gray-dk-3:     #777;
   $inset-clr: if($is-inverted, $w-2, $w-3);
   $shade-amp: if($is-inverted, 15%, 20%);
   $shade-height: 2px;
-  @include border-radius($radius-size);
-  @include box-shadow(inset 0 0 0 1px $inset-clr, // Overall bevel highlight.
-                      inset 0 1px $inset-clr, // Top bevel highlight.
-                      0 $shade-height darken($bg-clr, $shade-amp), // Bottom side shadow.
-                      0 4px 3px $b-1); // Casted shadow.
-  @include simple-gradient($clear, $b-1);
-  @include transition(background-color color);
   @include text-inset($w-5, $clear, $fg-clr, $offset);
   &.no-span {
     text-shadow: 0 1px $w-f;
     color: $fg-clr;
   }
-  background-color: $bg-clr;
   cursor: pointer;
+  background: {
+    color: $bg-clr;
+    image: linear-gradient($clear, $b-1);
+  }
+  border-radius: $radius-size;
+  box-shadow: (
+    inset 0 0 0 1px $inset-clr, // Overall bevel highlight.
+    inset 0 1px $inset-clr, // Top bevel highlight.
+    0 $shade-height darken($bg-clr, $shade-amp), // Bottom side shadow.
+    0 4px 3px $b-1 // Casted shadow.
+  );
   padding: $padding ($padding * 2);
   text-align: center;
   text-decoration: none;
+  transition: { property: background-color, color; duration: 0.3s; timing-function: ease-in-out; }
   width: auto;
   border: { width: 1px; style: solid; color: darken($bg-clr, 15%) darken($bg-clr, 20%) darken($bg-clr, 30%); }
   margin: { top: 0; bottom: $shade-height; }
@@ -258,12 +265,14 @@ $gray-dk-3:     #777;
     }
   }
   &:active {
+    box-shadow: (
+      inset 0 1px $inset-clr, // Top bevel highlight.
+      inset 0 -1px 1px $b-1, // Bottom shadow from depression.
+      inset 1px 0 $b-1, inset -1px 0 $b-1, // Side shadows from depression.
+      0 1px $w-5 // Hole's edge highlight.
+    );
     margin: { top: $shade-height; bottom: 0; }
     z-index: 2;
-    @include box-shadow(inset 0 1px $inset-clr, // Top bevel highlight.
-                        inset 0 -1px 1px $b-1, // Bottom shadow from depression.
-                        inset 1px 0 $b-1, inset -1px 0 $b-1, // Side shadows from depression.
-                        0 1px $w-5); // Hole's edge highlight.
   }
 }
 %chrome-button {
@@ -282,24 +291,31 @@ $gray-dk-3:     #777;
   }
 }
 %chrome-frame {
-  @include box-shadow(0 5px $base-lead $b-1, 0 5px 5px $b-1,
-                      inset 0 0 0 1px $w-3, inset 0 0 3px $frame-size $w-8);
   border: 1px solid;
   border-color: $gray-lt-1;
+  box-shadow: (
+    0 5px $base-lead $b-1,
+    0 5px 5px $b-1,
+    inset 0 0 0 1px $w-3,
+    inset 0 0 3px $frame-size $w-8
+  );
   background: $b-f;
   padding: $frame-size;
 }
 %chrome-frame-selectable {
   @extend %chrome-frame;
-  @include transition(border-color);
   cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
   &:hover {
     padding: 0;
     border: { width: $frame-size + 1px; color: $blue-1-dk; }
   }
 }
 %chrome-ruled {
-  @include box-shadow(inset 0 -1px $b-1, 0 1px $w-f);
+  box-shadow: (
+    inset 0 -1px $b-1,
+    0 1px $w-f
+  );
 }
 %chrome-inline-token {
   background: $blue-2-lt;
@@ -307,14 +323,17 @@ $gray-dk-3:     #777;
   border-bottom: 1px solid $blue-2;
 }
 %chrome-overlay {
-  @include box-shadow(0 1px 2px $b-3, inset 0 0 0 1px $w-1);
   color: $w-8;
   background: rgba($gray-lt-2, 0.3);
   border: 1px solid $b-3;
+  box-shadow: (
+    0 1px 2px $b-3,
+    inset 0 0 0 1px $w-1
+  );
 }
 
 %transition-fading {
-  @include transition(opacity);
+  transition: opacity 0.3s ease-in-out;
 }
 %behavior-fading {
   @extend %transition-fading;
@@ -464,12 +483,14 @@ body {
 .root-footer {
   @extend %stationery-inverted;
   @include border-side-radius(top, $radius-size);
-  @include box-shadow(inset -1px 0 $w-3, inset 1px 0 $w-3,
-                      inset 0 1px $w-5,
-                      inset 0 (-$base-line) $base-lead 5px $b-2,
-                      0 5px 10px $b-2);
   border: 1px solid;
   border-color: $b-1 $b-2;
+  box-shadow: (
+    inset -1px 0 $w-3, inset 1px 0 $w-3,
+    inset 0 1px $w-5,
+    inset 0 (-$base-line) $base-lead 5px $b-2,
+    0 5px 10px $b-2
+  );
   padding: { top: $base-lead; bottom: $base-lead * 2; }
   margin: ($base-lead * 2) $f-gutter-size;
   margin-bottom: 0;
