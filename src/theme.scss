@@ -45,10 +45,10 @@ $gray-dk-3:     #777;
     family: "Roboto", Helvetica, Arial, sans-serif;
     weight: 500;
   }
+  line-height: 1.2em;
   .no-fontface & {
     font-weight: bold;
   }
-  line-height: 1.2em;
 }
 %type-code {
   font: normal 1em "Source Code Pro", Inconsolata, Consolas, sans-serif;
@@ -57,20 +57,20 @@ $gray-dk-3:     #777;
   $size: 1em;
   @mixin shared {
     display: block;
+    font: { size: 4em; weight: 700; }
     position: relative;
     opacity: 0.2;
-    font: { size: 4em; weight: 700; }
     .no-fontface & { font-weight: bold; }
   }
   margin: { top: -$size; bottom: -$size; }
   &::before {
-    content: open-quote;
     @include shared;
+    content: open-quote;
     top: $size * 0.6; left: -$size * 0.6;
   }
   &::after {
-    content: close-quote;
     @include shared;
+    content: close-quote;
     top: -$size * 0.2; left: 100%;
   }
 }
@@ -131,8 +131,8 @@ $gray-dk-3:     #777;
 }
 %layout-column {
   float: left;
-  position: relative;
   margin-right: $gutter-size;
+  position: relative;
   &:last-child {
     margin-right: 0;
   }
@@ -172,13 +172,13 @@ $gray-dk-3:     #777;
 }
 
 %stationery-ruled {
-  display: block;
   background: {
     image: linear-gradient($gray-lt-3 1px, transparent 1px);
+    position: 0 $base-lead;
     repeat: repeat;
     size: $base-lead $base-lead;
-    position: 0 $base-lead;
   }
+  display: block;
 }
 %stationery-ruled-list {
   >li:not(:first-child) {
@@ -206,27 +206,27 @@ $gray-dk-3:     #777;
   $color: rgba($gray-dk-3, 0.3);
   input {
     border: 0;
+    border-bottom: $weight solid $color;
     background: transparent;
     padding: $padding ($padding * 2);
     &:focus {
       outline: 0;
     }
-    border-bottom: $weight solid $color;
   }
   &::before, &::after {
-    content: "\0020";
-    height: $height;
-    width: $weight;
-    display: block;
-    position: relative;
     background: $color;
+    content: "\0020";
+    display: block;
+    height: $height;
+    position: relative;
+    width: $weight;
   }
   &::before {
     bottom: -28px;
   }
   &::after {
-    top: -$height;
     left: 99%;
+    top: -$height;
   }
 }
 @mixin chrome-button ($bg-clr, $bg-clr-on, $fg-clr, $fg-clr-on, $offset:3px, $padding:5px) {
@@ -236,28 +236,28 @@ $gray-dk-3:     #777;
   $shade-height: 2px;
   @include text-inset($w-5, $clear, $fg-clr, $offset);
   &.no-span {
-    text-shadow: 0 1px $w-f;
     color: $fg-clr;
+    text-shadow: 0 1px $w-f;
   }
-  cursor: pointer;
   background: {
     color: $bg-clr;
     image: linear-gradient($clear, $b-1);
   }
   border-radius: $radius-size;
+  border: { width: 1px; style: solid; color: darken($bg-clr, 15%) darken($bg-clr, 20%) darken($bg-clr, 30%); }
   box-shadow: (
     inset 0 0 0 1px $inset-clr, // Overall bevel highlight.
     inset 0 1px $inset-clr, // Top bevel highlight.
     0 $shade-height darken($bg-clr, $shade-amp), // Bottom side shadow.
     0 4px 3px $b-1 // Casted shadow.
   );
+  cursor: pointer;
+  margin: { top: 0; bottom: $shade-height; }
   padding: $padding ($padding * 2);
   text-align: center;
   text-decoration: none;
   transition: { property: background-color, color; duration: 0.3s; timing-function: ease-in-out; }
   width: auto;
-  border: { width: 1px; style: solid; color: darken($bg-clr, 15%) darken($bg-clr, 20%) darken($bg-clr, 30%); }
-  margin: { top: 0; bottom: $shade-height; }
   &:hover, &:focus {
     background-color: $bg-clr-on;
     &.no-span, >span::before {
@@ -291,15 +291,14 @@ $gray-dk-3:     #777;
   }
 }
 %chrome-frame {
-  border: 1px solid;
-  border-color: $gray-lt-1;
+  background: $b-f;
+  border: { width: 1px; style: solid; color: $gray-lt-1; }
   box-shadow: (
     0 5px $base-lead $b-1,
     0 5px 5px $b-1,
     inset 0 0 0 1px $w-3,
     inset 0 0 3px $frame-size $w-8
   );
-  background: $b-f;
   padding: $frame-size;
 }
 %chrome-frame-selectable {
@@ -307,8 +306,8 @@ $gray-dk-3:     #777;
   cursor: pointer;
   transition: border-color 0.3s ease-in-out;
   &:hover {
-    padding: 0;
     border: { width: $frame-size + 1px; color: $blue-1-dk; }
+    padding: 0;
   }
 }
 %chrome-ruled {
@@ -319,17 +318,17 @@ $gray-dk-3:     #777;
 }
 %chrome-inline-token {
   background: $blue-2-lt;
-  padding: 0 0.3em;
   border-bottom: 1px solid $blue-2;
+  padding: 0 0.3em;
 }
 %chrome-overlay {
-  color: $w-8;
   background: rgba($gray-lt-2, 0.3);
   border: 1px solid $b-3;
   box-shadow: (
     0 1px 2px $b-3,
     inset 0 0 0 1px $w-1
   );
+  color: $w-8;
 }
 
 %transition-fading {
@@ -365,8 +364,8 @@ body {
       width: $full-width;
       >.main-content {
         @extend %layout-column;
-        width: $main-width;
         padding-left: $push-width;
+        width: $main-width;
       }
       >aside {
         @extend %layout-column;
@@ -439,8 +438,8 @@ body {
       width: $full-width;
       >.main-content {
         @extend %layout-column;
-        width: $main-width;
         padding-left: $push-width;
+        width: $main-width;
         @media only screen and (max-width: $width-1) {
           padding-left: $push-width - $f-gutter-size;
         }
@@ -469,10 +468,10 @@ body {
   .logo {
     .ir {
       $height: 104px;
-      display: block;
-      width: 500px;
-      height: $height;
       background-image: url(#{$_root}/banner-logo-sprite.png);
+      display: block;
+      height: $height;
+      width: 500px;
       &:hover {
         background-position: 0 (-$height);
       }
@@ -503,10 +502,10 @@ body {
 #{$_headings} {
   @extend %type-heading;
   color: $gray-dk-2;
-  margin-bottom: 0.15em;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=hIEfix.png,sizingMethod=crop);
-  zoom: 1;
+  margin-bottom: 0.15em;
   text-shadow: 0 1px $b-f;
+  zoom: 1;
 }
 h1, %type-h1 {
   letter-spacing: -0.02em;
@@ -518,9 +517,9 @@ $h_sizes: 34px 24px 20px 18px 16px;
 $h_leads: 44px 33px 22px 22px 22px;
 @for $i from 1 through 5{
   #{h}#{$i}, %type-h#{$i} {
-    margin: 0;
     font-size: nth($h_sizes, $i);
     line-height: nth($h_leads, $i);
+    margin: 0;
   }
 }
 
@@ -581,16 +580,16 @@ code {
   @extend %layout-content-box;
   $lead: round(1.5 * nth($h_sizes, 4));
   line-height: $lead;
-  word-spacing: 3px;
   margin: { left: auto; right: auto; }
   padding: 0;
+  word-spacing: 3px;
   span {
     @extend %stationery-ruled;
-    padding-top: 0.3em;
     background: {
       size: $lead $lead;
       position: 0 $lead;
     }
+    padding-top: 0.3em;
   }
   +p:last-child {
     margin-top: 0;
@@ -608,20 +607,23 @@ img.framed {
   }
 }
 .has-expandable {
-  position: relative;
-  cursor: pointer;
   $size: $base-line;
+  cursor: pointer;
+  position: relative;
   &::before {
     @extend %chrome-overlay;
     @extend %type-glyph;
     @extend %transition-fading;
+    border-radius: $size / 2;
+    bottom: $size;
     content: "\f0b2";
-    position: absolute;
-    width: $size; height: $size;
-    bottom: $size; left: $size;
-    padding: $size / 2; border-radius: $size / 2;
-    text-align: center;
+    height: $size;
+    left: $size;
     opacity: 0.2;
+    padding: $size / 2;
+    position: absolute;
+    text-align: center;
+    width: $size;
     .content:hover & {
       opacity: 1;
     }
@@ -681,8 +683,8 @@ button {
 }
 .post {
   >.meta-info {
-    text-align: right;
     padding-top: $base-lead;
+    text-align: right;
     .date {
       font-style: italic;
       >a {
