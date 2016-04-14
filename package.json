@@ -17,9 +17,12 @@
     "matchdep": "^0.3.0"
   },
   "dependencies": {
+    "hlf-css": "^0.2.0",
     "normalize.css": "^3.0.3"
   },
   "scripts": {
-    "lib": "cp -R node_modules/normalize.css lib/normalize"
+    "postinstall": "npm run hlf-css && npm run normalize-css",
+    "hlf-css": "cp node_modules/hlf-css/dist/scss/imports/* lib/hlf-css && cp node_modules/hlf-css/lib/modified/_fontawesome.scss lib/hlf-css",
+    "normalize-css": "cp node_modules/normalize.css/normalize.css lib/normalize.css"
   }
 }
