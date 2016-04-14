@@ -1,4 +1,4 @@
-@import "../lib/custom/mixins.scss";
+@import "../lib/hlf-css/chrome-helpers";
 
 $_weight: '#html';
 $_headings: 'h1, h2, h3, h4, h5, h6';
@@ -343,7 +343,7 @@ $gray-dk-3:     #777;
 }
 
 $_fontawesome-path: '#{$_root}/../font';
-@import "../lib/custom/fontawesome-bare.scss";
+@import "../lib/hlf-css/fontawesome";
 
 body {
   @extend %type-copy;
