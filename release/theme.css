@@ -40,8 +40,8 @@ pre, code {
     display: block;
     font-size: 4em;
     font-weight: 700;
-    position: relative;
     opacity: 0.2;
+    position: relative;
     content: open-quote;
     top: 0.6em;
     left: -0.6em; }
@@ -51,8 +51,8 @@ pre, code {
     display: block;
     font-size: 4em;
     font-weight: 700;
-    position: relative;
     opacity: 0.2;
+    position: relative;
     content: close-quote;
     top: -0.2em;
     left: 100%; }

@@ -58,8 +58,8 @@ $gray-dk-3:     #777;
   @mixin shared {
     display: block;
     font: { size: 4em; weight: 700; }
-    position: relative;
     opacity: 0.2;
+    position: relative;
     .no-fontface & { font-weight: bold; }
   }
   margin: { top: -$size; bottom: -$size; }

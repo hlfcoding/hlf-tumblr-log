@@ -22,7 +22,7 @@
   },
   "scripts": {
     "postinstall": "npm run hlf-css && npm run normalize-css",
-    "hlf-css": "cp node_modules/hlf-css/dist/scss/imports/* lib/hlf-css && cp node_modules/hlf-css/lib/modified/_fontawesome.scss lib/hlf-css",
+    "hlf-css": "cp node_modules/hlf-css/{dist/scss/imports/*,lib/modified/_fontawesome.scss} lib/hlf-css",
     "normalize-css": "cp node_modules/normalize.css/normalize.css lib/normalize.css"
   }
 }
