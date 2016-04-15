@@ -33,7 +33,7 @@ module.exports = (grunt) ->
     coffee:
       src:
         expand: yes
-        src: 'src/**/*.coffee'
+        src: 'src/theme.coffee'
         dest: 'release/'
         ext: '.js'
         extDot: 'last'
