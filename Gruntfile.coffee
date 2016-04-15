@@ -40,11 +40,8 @@ module.exports = (grunt) ->
         flatten: yes
     copy:
       release:
-        expand: yes
-        src: 'lib/**/*.css'
-        dest: 'release/'
-        extDot: 'last'
-        flatten: yes
+        src: 'lib/hlf-css/_helpers.scss'
+        dest: 'release/helpers.css'
     sass:
       src:
         expand: yes

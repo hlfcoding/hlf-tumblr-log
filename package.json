@@ -20,7 +20,8 @@
     "hlf-css": "^0.2.0"
   },
   "scripts": {
-    "postinstall": "npm run hlf-css",
-    "hlf-css": "cp node_modules/hlf-css/{dist/scss/imports/*,lib/modified/_{fontawesome,normalize}.scss} lib/hlf-css"
+    "postinstall": "npm run hlf-css:dist && npm run hlf-css:lib",
+    "hlf-css:dist": "cp node_modules/hlf-css/dist/scss/imports/* lib/hlf-css",
+    "hlf-css:lib": "cp node_modules/hlf-css/lib/modified/{_{fontawesome,normalize},html5-boilerplate/_{print,helpers}}.scss lib/hlf-css"
   }
 }
