@@ -48,7 +48,7 @@ module.exports = (grunt) ->
     sass:
       src:
         expand: yes
-        src: 'src/**/*.scss'
+        src: 'src/theme.scss'
         dest: 'release/'
         ext: '.css'
         extDot: 'last'
