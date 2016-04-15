@@ -31,25 +31,18 @@ module.exports = (grunt) ->
         'release/*'
       ]
     coffee:
+      options: { sourceMap: yes }
       src:
-        expand: yes
         src: 'src/theme.coffee'
-        dest: 'release/'
-        ext: '.js'
-        extDot: 'last'
-        flatten: yes
+        dest: 'release/theme.js' 
     copy:
       release:
         src: 'lib/hlf-css/_helpers.scss'
         dest: 'release/helpers.css'
     sass:
       src:
-        expand: yes
         src: 'src/theme.scss'
-        dest: 'release/'
-        ext: '.css'
-        extDot: 'last'
-        flatten: yes
+        dest: 'release/theme.css'
     watch:
       # Caveat: These watch tasks do not clean.
       css:
