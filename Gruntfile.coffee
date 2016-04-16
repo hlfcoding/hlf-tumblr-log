@@ -10,7 +10,7 @@ module.exports = (grunt) ->
         cascade: yes
       src:
         expand: yes
-        src: 'release/**/*.css'
+        src: 'release/*.css'
         ext: '.css'
         extDot: 'last'
     bump:
@@ -24,7 +24,6 @@ module.exports = (grunt) ->
     clean:
       lib: [
         'lib/*'
-        '!lib/custom'
         '!lib/.gitignore'
       ]
       release: [
@@ -36,7 +35,7 @@ module.exports = (grunt) ->
         src: 'src/theme.coffee'
         dest: 'release/theme.js' 
     copy:
-      release:
+      lib:
         src: 'lib/hlf-css/_helpers.scss'
         dest: 'release/helpers.css'
     sass:
@@ -61,7 +60,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'release', [
     'clean:release'
-    'copy:release'
+    'copy:lib'
     'coffee'
     'sass'
     'autoprefixer'
