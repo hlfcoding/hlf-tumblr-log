@@ -13,6 +13,15 @@ module.exports = (grunt) ->
         src: 'release/*.css'
         ext: '.css'
         extDot: 'last'
+    aws_s3:
+      options:
+        # See MathieuLoutre/grunt-aws-s3 and environment variable usage.
+        bucket: 'pengxwang'
+      release:
+        expand: yes
+        cwd: 'release'
+        src: '*.{css,js}'
+        dest: 'main/blog/'
     bump:
       options:
         files: [
@@ -64,4 +73,5 @@ module.exports = (grunt) ->
     'coffee'
     'sass'
     'autoprefixer'
+    'aws_s3:release'
   ]
