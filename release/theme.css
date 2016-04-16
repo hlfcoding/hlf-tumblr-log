@@ -702,8 +702,8 @@ p code {
 
 @font-face {
   font-family: 'FontAwesome';
-  src: url("http://pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.eot");
-  src: url("http://pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("http://pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.woff") format("woff"), url("http://pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.ttf") format("truetype");
+  src: url("//pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.eot");
+  src: url("//pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("//pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.woff") format("woff"), url("//pengxwang.s3.amazonaws.com/main/blog/../font/fontawesome-webfont.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 /*  Font Awesome styles
@@ -1830,7 +1830,7 @@ p code {
   content: "\f18b"; }
 
 body {
-  background: #f1f1f1 url(http://pengxwang.s3.amazonaws.com/main/blog/gradient.jpg) 0 -50px repeat-x fixed;
+  background: #f1f1f1 url(//pengxwang.s3.amazonaws.com/main/blog/gradient.jpg) 0 -50px repeat-x fixed;
   border-top: 6px solid #05d;
   color: #221; }
   body > .root-header > section {
@@ -1888,7 +1888,7 @@ body {
   overflow: hidden;
   padding-right: 14px; }
 .banner .logo .ir {
-  background-image: url(http://pengxwang.s3.amazonaws.com/main/blog/banner-logo-sprite.png);
+  background-image: url(//pengxwang.s3.amazonaws.com/main/blog/banner-logo-sprite.png);
   display: block;
   height: 104px;
   width: 500px; }
