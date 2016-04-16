@@ -1,7 +1,3 @@
-@import "imports/resets";
-
-@import "../lib/hlf-css/chrome-helpers";
-
 $_weight: '#html';
 $_headings: 'h1, h2, h3, h4, h5, h6';
 $_root: 'http://pengxwang.s3.amazonaws.com/main/blog';
@@ -34,304 +30,12 @@ $gray-dk-1:     #333;
 $gray-dk-2:     #444;
 $gray-dk-3:     #777;
 
-%type-copy {
-  font: normal #{$base-line}/#{$base-lead} "Bitter", Georgia, serif;
-  word-spacing: 1px;
-}
-%type-copy-meta {
-  font-size: $meta-size;
-  opacity: 0.6;
-}
-%type-heading {
-  font: {
-    family: "Roboto", Helvetica, Arial, sans-serif;
-    weight: 500;
-  }
-  line-height: 1.2em;
-  .no-fontface & {
-    font-weight: bold;
-  }
-}
-%type-code {
-  font: normal 1em "Source Code Pro", Inconsolata, Consolas, sans-serif;
-}
-%type-quoted {
-  $size: 1em;
-  @mixin shared {
-    display: block;
-    font: { size: 4em; weight: 700; }
-    opacity: 0.2;
-    position: relative;
-    .no-fontface & { font-weight: bold; }
-  }
-  margin: { top: -$size; bottom: -$size; }
-  &::before {
-    @include shared;
-    content: open-quote;
-    top: $size * 0.6; left: -$size * 0.6;
-  }
-  &::after {
-    @include shared;
-    content: close-quote;
-    top: -$size * 0.2; left: 100%;
-  }
-}
-%type-link {
-  color: $blue-1;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-  .body &, nav & {
-    text-shadow: 0 1px light(1);
-  }
-  &:hover,
-  &:focus,
-  &:active {
-    color: $blue-1-lt;
-  }
-}
-%type-control {
-  font: {
-    family: "Roboto", Helvetica, Arial, sans-serif;
-    weight: 500;
-  }
-  .no-fontface & {
-    font-weight: bold;
-  }
-  line-height: 1.2em;
-}
-%type-glyph {
-  font-family: FontAwesome;
-  line-height: 1;
-  text-decoration: none;
-}
+@import "imports/resets";
+@import "../lib/hlf-css/chrome-helpers";
 
-%layout-content-box {
-  p:first-child { margin-top: 0; }
-  p:last-child { margin-bottom: 0; }
-  li { display: list-item; }
-  ol li { list-style: decimal outside; }
-  ul li { list-style: square outside; }
-}
-%layout-page-slice {
-  margin-bottom: $base-lead * 2;
-}
-%layout-wrapper-slice {
-  margin: { left: auto; right: auto; }
-  position: relative;
-}
-%layout-box-slice {
-  margin: { top: $base-lead; bottom: $base-lead; }
-}
-%layout-row {
-  display: block;
-  margin-bottom: $base-line;
-}
-%layout-columns {
-  @extend %clearfix;
-  position: relative;
-}
-%layout-column {
-  float: left;
-  margin-right: $gutter-size;
-  position: relative;
-  &:last-child {
-    margin-right: 0;
-  }
-}
-%layout-box-list {
-  >li {
-    @extend %layout-row;
-    list-style: none;
-    >a {
-      display: inline-block;
-    }
-  }
-}
-%layout-bar-list {
-  @extend %layout-columns;
-  >li {
-    float: left;
-    list-style: none;
-    &, >a {
-      display: block;
-    }
-  }
-}
-%layout-meta-list {
-  >li {
-    list-style: none;
-  }
-}
-%layout-grid {
-  @extend %clearfix;
-  display: block;
-}
-%layout-grid-item {
-  float: left;
-  display: block;
-  margin: { right: $g-gutter-size; bottom: $g-gutter-size; }
-}
-
-%stationery-ruled {
-  background: {
-    image: linear-gradient($gray-lt-3 1px, transparent 1px);
-    position: 0 $base-lead;
-    repeat: repeat;
-    size: $base-lead $base-lead;
-  }
-  display: block;
-}
-%stationery-ruled-list {
-  >li:not(:first-child) {
-    border-top: 1px solid $gray-lt-3;
-  }
-}
-%stationery-inverted {
-  background: $blue-1-dk;
-  color: $white-2;
-}
-%stationery-screen {
-  background: $blue-2-lt;
-  border: 1px solid $blue-2;
-  box-shadow: (
-    0 2px $base-line shade(0.1),
-    0 1px 3px shade(0.1),
-    inset 0 0 0 1px light(0.3)
-  );
-}
-
-%chrome-field {
-  $padding: 5px;
-  $weight: 2px;
-  $height: 10px;
-  $color: rgba($gray-dk-3, 0.3);
-  input {
-    border: 0;
-    border-bottom: $weight solid $color;
-    background: transparent;
-    padding: $padding ($padding * 2);
-    &:focus {
-      outline: 0;
-    }
-  }
-  &::before, &::after {
-    background: $color;
-    content: "\0020";
-    display: block;
-    height: $height;
-    position: relative;
-    width: $weight;
-  }
-  &::before {
-    bottom: -28px;
-  }
-  &::after {
-    left: 99%;
-    top: -$height;
-  }
-}
-@mixin chrome-button ($bg-clr, $bg-clr-on, $fg-clr, $fg-clr-on, $offset:3px, $padding:5px) {
-  $is-inverted: lightness($bg-clr) < 70%;
-  $inset-clr: if($is-inverted, light(0.2), light(0.3));
-  $shade-amp: if($is-inverted, 15%, 20%);
-  $shade-height: 2px;
-  @include text-inset(light(0.5), transparent, $fg-clr, $offset);
-  &.no-span {
-    color: $fg-clr;
-    text-shadow: 0 1px light(1);
-  }
-  background: {
-    color: $bg-clr;
-    image: linear-gradient(transparent, shade(0.1));
-  }
-  border-radius: $radius-size;
-  border: { width: 1px; style: solid; color: darken($bg-clr, 15%) darken($bg-clr, 20%) darken($bg-clr, 30%); }
-  box-shadow: (
-    inset 0 0 0 1px $inset-clr, // Overall bevel highlight.
-    inset 0 1px $inset-clr, // Top bevel highlight.
-    0 $shade-height darken($bg-clr, $shade-amp), // Bottom side shadow.
-    0 4px 3px shade(0.1) // Casted shadow.
-  );
-  cursor: pointer;
-  margin: { top: 0; bottom: $shade-height; }
-  padding: $padding ($padding * 2);
-  text-align: center;
-  text-decoration: none;
-  transition: { property: background-color, color; duration: 0.3s; timing-function: ease-in-out; }
-  width: auto;
-  &:hover, &:focus {
-    background-color: $bg-clr-on;
-    &.no-span, >span::before {
-      color: $fg-clr-on; // Otherwise won't work due to text-inset.
-    }
-  }
-  &:active {
-    box-shadow: (
-      inset 0 1px $inset-clr, // Top bevel highlight.
-      inset 0 -1px 1px shade(0.1), // Bottom shadow from depression.
-      inset 1px 0 shade(0.1), inset -1px 0 shade(0.1), // Side shadows from depression.
-      0 1px light(0.5) // Hole's edge highlight.
-    );
-    margin: { top: $shade-height; bottom: 0; }
-    z-index: 2;
-  }
-}
-%chrome-button {
-  @include chrome-button($gray-lt-4, $white-2, $gray-dk-3, $blue-1-lt, 2px);
-}
-%chrome-button-inverted {
-  @include chrome-button($blue-1, $blue-1-lt, $blue-2-lt, light(1));
-}
-%chrome-segmented {
-  >li:not(:first-child)>a {
-    @include border-side-radius(left, 0);
-  }
-  >li:not(:last-child)>a {
-    @include border-side-radius(right, 0);
-    border-right-width: 0;
-  }
-}
-%chrome-frame {
-  background: shade(1);
-  border: { width: 1px; style: solid; color: $gray-lt-1; }
-  box-shadow: (
-    0 5px $base-lead shade(0.1),
-    0 5px 5px shade(0.1),
-    inset 0 0 0 1px light(0.3),
-    inset 0 0 3px $frame-size light(0.8)
-  );
-  padding: $frame-size;
-}
-%chrome-frame-selectable {
-  @extend %chrome-frame;
-  cursor: pointer;
-  transition: border-color 0.3s ease-in-out;
-  &:hover {
-    border: { width: $frame-size + 1px; color: $blue-1-dk; }
-    padding: 0;
-  }
-}
-%chrome-ruled {
-  box-shadow: (
-    inset 0 -1px shade(0.1),
-    0 1px light(1)
-  );
-}
-%chrome-inline-token {
-  background: $blue-2-lt;
-  border-bottom: 1px solid $blue-2;
-  padding: 0 0.3em;
-}
-%chrome-overlay {
-  background: rgba($gray-lt-2, 0.3);
-  border: 1px solid shade(0.3);
-  box-shadow: (
-    0 1px 2px shade(0.3),
-    inset 0 0 0 1px light(0.1)
-  );
-  color: light(0.8);
-}
+@import "imports/typography";
+@import "imports/layout";
+@import "imports/skin";
 
 %transition-fading {
   transition: opacity 0.3s ease-in-out;
@@ -361,8 +65,8 @@ body {
   $side-width: $full-width - $main-width - $gutter-size;
   >.root-header {
     >section {
-      @extend %layout-wrapper-slice;
       @extend %layout-columns;
+      @extend %layout-wrapper-slice;
       width: $full-width;
       >.main-content {
         @extend %layout-column;
@@ -377,8 +81,8 @@ body {
   }
   >.root-body {
     >.inner {
-      @extend %layout-wrapper-slice;
       @extend %layout-columns;
+      @extend %layout-wrapper-slice;
       width: $full-width;
       >.main-content {
         @extend %layout-column;
@@ -435,8 +139,8 @@ body {
   }
   >.root-footer {
     >.inner {
-      @extend %layout-wrapper-slice;
       @extend %layout-columns;
+      @extend %layout-wrapper-slice;
       width: $full-width;
       >.main-content {
         @extend %layout-column;
@@ -539,8 +243,8 @@ ul, ol {
     }
   }
   nav.bar > & {
-    @extend %layout-bar-list;
     @extend %chrome-segmented;
+    @extend %layout-bar-list;
   }
 }
 
