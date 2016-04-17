@@ -42,7 +42,7 @@ module.exports = (grunt) ->
       options: { sourceMap: yes }
       src:
         src: 'src/theme.coffee'
-        dest: 'release/theme.js' 
+        dest: 'release/theme.js'
     copy:
       lib:
         src: 'lib/hlf-css/_helpers.scss'
