@@ -33,6 +33,7 @@
   float: left;
   margin-right: $gutter-size;
   position: relative;
+
   &:last-child {
     margin-right: 0;
   }
@@ -42,6 +43,7 @@
   >li {
     @extend %layout-row;
     list-style: none;
+
     >a {
       display: inline-block;
     }
@@ -50,6 +52,7 @@
 
 %layout-bar-list {
   @extend %layout-columns;
+
   >li {
     float: left;
     list-style: none;

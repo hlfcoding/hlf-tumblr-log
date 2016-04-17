@@ -49,7 +49,7 @@
   &::before,
   &::after {
     background: $color;
-    content: "\0020";
+    content: '\0020';
     display: block;
     height: $height;
     position: relative;

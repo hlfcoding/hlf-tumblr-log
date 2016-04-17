@@ -51,6 +51,7 @@ $gray-dk-3:     #777;
 %transition-fading {
   transition: opacity .3s ease-in-out;
 }
+
 %behavior-fading {
   @extend %transition-fading;
   opacity: 1;
@@ -92,6 +93,7 @@ body {
   @extend %layout-columns;
   @extend %layout-wrapper-slice;
   width: $full-width;
+
   >.main-content {
     @extend %layout-column;
     width: $main-width;
@@ -110,6 +112,7 @@ body {
       }
     }
   }
+
   >.side-content {
     @extend %layout-column;
     width: $side-width;
@@ -261,11 +264,13 @@ ol {
   padding-left: 0;
 
   nav:not(.bar) > &,
-  &.posts, &.modules {
+  &.posts,
+  &.modules {
     @extend %layout-box-list;
   }
 
-  &.posts, &.modules {
+  &.posts,
+  &.modules {
     >li:not(:last-child) {
       @extend %chrome-ruled;
       padding-bottom: $base-line;
@@ -427,7 +432,7 @@ input[type='submit'],
   @extend %type-control;
   @extend %chrome-button;
 
-  &>span[class^=icon] {
+  >span[class^=icon] {
     vertical-align: middle;
   }
 }
@@ -450,8 +455,10 @@ button {
 .post>.meta-info {
   padding-top: $base-lead;
   text-align: right;
+
   .date {
     font-style: italic;
+
     >a {
       color: $gray-dk-3;
     }
