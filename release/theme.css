@@ -610,25 +610,25 @@ pre {
   border: 1px solid #ace;
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.3); }
 
-.field.input input {
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid rgba(119, 119, 119, 0.3);
-  padding: 5px 10px; }
-  .field.input input:focus {
-    outline: 0; }
-.field.input::before, .field.input::after {
-  background: rgba(119, 119, 119, 0.3);
-  content: '\0020';
-  display: block;
-  height: 10px;
-  position: relative;
-  width: 2px; }
-.field.input::before {
-  bottom: -28px; }
-.field.input::after {
-  left: 99%;
-  top: -10px; }
+.field.input {
+  position: relative; }
+  .field.input input {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid rgba(119, 119, 119, 0.3);
+    padding: 5px 10px; }
+    .field.input input:focus {
+      outline: 0; }
+  .field.input::before, .field.input::after {
+    background: rgba(119, 119, 119, 0.3);
+    bottom: 0;
+    content: '\0020';
+    display: block;
+    height: 10px;
+    position: absolute;
+    width: 2px; }
+  .field.input::after {
+    right: 0; }
 
 input[type='submit'],
 .button, button {
@@ -677,7 +677,7 @@ ol > li:not(:first-child) > a {
   border-bottom-left-radius: 0; }
 nav.bar > ul > li:not(:last-child) > a, nav.bar >
 ol > li:not(:last-child) > a {
-  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right-width: 0; }
 
@@ -1925,7 +1925,7 @@ body {
 
 .root-footer {
   border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-right-radius: 4px;
   border: 1px solid;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2);
   box-shadow: inset -1px 0 rgba(255, 255, 255, 0.3), inset 1px 0 rgba(255, 255, 255, 0.3), inset 0 1px rgba(255, 255, 255, 0.5), inset 0 -14px 22px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.2);

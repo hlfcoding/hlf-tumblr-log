@@ -34,6 +34,7 @@
   $weight: 2px;
   $height: 10px;
   $color: rgba($gray-dk-3, .3);
+  position: relative;
 
   input {
     background: transparent;
@@ -49,20 +50,16 @@
   &::before,
   &::after {
     background: $color;
+    bottom: 0;
     content: '\0020';
     display: block;
     height: $height;
-    position: relative;
+    position: absolute;
     width: $weight;
   }
 
-  &::before {
-    bottom: -28px;
-  }
-
   &::after {
-    left: 99%;
-    top: -$height;
+    right: 0;
   }
 }
 
