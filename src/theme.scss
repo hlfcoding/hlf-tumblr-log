@@ -12,7 +12,18 @@ $meta-size:     12px;
 $g-gutter-size: $base-line; // Grid.
 $f-gutter-size: 13px; // Root footer.
 
+// TODO: Refactor with a map.
+$h_sizes:       34px 24px 20px 18px 16px;
+$h_leads:       44px 33px 22px 22px 22px;
+
+// Grid.
 $width-1:       980px;
+$true-width:    500px;
+$meta-width:    160px;
+$push-width:    $meta-width + $gutter-size;
+$full-width:    $width-1;
+$main-width:    $true-width + $meta-width + $gutter-size;
+$side-width:    $full-width - $main-width - $gutter-size;
 
 $white-1:       #f1f1f1;
 $white-2:       #f8f8f8;
@@ -30,15 +41,15 @@ $gray-dk-1:     #333;
 $gray-dk-2:     #444;
 $gray-dk-3:     #777;
 
-@import "imports/resets";
-@import "../lib/hlf-css/chrome-helpers";
+@import 'imports/resets';
+@import '../lib/hlf-css/chrome-helpers';
 
-@import "imports/typography";
-@import "imports/layout";
-@import "imports/skin";
+@import 'imports/typography';
+@import 'imports/layout';
+@import 'imports/skin';
 
 %transition-fading {
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity .3s ease-in-out;
 }
 %behavior-fading {
   @extend %transition-fading;
@@ -49,121 +60,132 @@ $gray-dk-3:     #777;
 }
 
 $_fontawesome-path: '#{$_root}/../font';
-@import "../lib/hlf-css/fontawesome";
+@import '../lib/hlf-css/fontawesome';
 
 body {
   @extend %type-copy;
   background: $white-1 url(#{$_root}/gradient.jpg) 0 -50px repeat-x fixed;
   border-top: $ribbon-size solid $blue-1-dk;
   color: $black-1;
-  // Grid.
-  $true-width: 500px;
-  $meta-width: 160px;
-  $push-width: $meta-width + $gutter-size;
-  $full-width: $width-1;
-  $main-width: $true-width + $meta-width + $gutter-size;
-  $side-width: $full-width - $main-width - $gutter-size;
-  >.root-header {
-    >section {
-      @extend %layout-columns;
-      @extend %layout-wrapper-slice;
-      width: $full-width;
-      >.main-content {
-        @extend %layout-column;
-        padding-left: $push-width;
-        width: $main-width;
+}
+
+// section: grid-related
+
+.root-header>section {
+  @extend %layout-columns;
+  @extend %layout-wrapper-slice;
+  width: $full-width;
+
+  >.main-content {
+    @extend %layout-column;
+    padding-left: $push-width;
+    width: $main-width;
+  }
+
+  >aside {
+    @extend %layout-column;
+    width: $side-width;
+  }
+}
+
+.root-body>.inner {
+  @extend %layout-columns;
+  @extend %layout-wrapper-slice;
+  width: $full-width;
+  >.main-content {
+    @extend %layout-column;
+    width: $main-width;
+
+    >.feedback,
+    >footer {
+      >* {
+        margin-left: $push-width;
       }
-      >aside {
-        @extend %layout-column;
-        width: $side-width;
+
+      &::before {
+        @extend %chrome-ruled;
+        content: ' ';
+        display: block;
+        height: 2px;
       }
     }
   }
-  >.root-body {
-    >.inner {
-      @extend %layout-columns;
-      @extend %layout-wrapper-slice;
-      width: $full-width;
-      >.main-content {
-        @extend %layout-column;
-        width: $main-width;
-        article {
-          @extend %layout-columns;
-          >aside {
-            @extend %layout-column;
-            width: $meta-width;
-          }
-          >.content {
-            @extend %layout-column;
-            width: $true-width;
-            .p_image_embed {
-              $size: $base-lead * 4;
-              $num-per-row: floor(($true-width + $g-gutter-size) / ($size + $g-gutter-size));
-              @extend %layout-grid;
-              img {
-                @extend %layout-grid-item;
-                width: $size;
-                &:nth-child(#{$num-per-row}n) {
-                  margin-right: 0;
-                }
-              }
-            }
-          }
-        }
-        >.feedback,
-        >footer {
-          >* {
-            margin-left: $push-width;
-          }
-          &::before {
-            @extend %chrome-ruled;
-            content: " ";
-            display: block;
-            height: 2px;
-          }
-        }
+  >.side-content {
+    @extend %layout-column;
+    width: $side-width;
+
+    .search {
+      >.field>input {
+        width: $side-width - 80px;
       }
-      >.side-content {
-        @extend %layout-column;
-        width: $side-width;
-        .search {
-          >.field>input {
-            width: $side-width - 80px;
-          }
-          >button {
-            margin-left: 5px;
-          }
-        }
-      }
-    }
-  }
-  >.root-footer {
-    >.inner {
-      @extend %layout-columns;
-      @extend %layout-wrapper-slice;
-      width: $full-width;
-      >.main-content {
-        @extend %layout-column;
-        padding-left: $push-width;
-        width: $main-width;
-        @media only screen and (max-width: $width-1) {
-          padding-left: $push-width - $f-gutter-size;
-        }
-      }
-      >aside {
-        @extend %layout-column;
-        width: $side-width;
+
+      >button {
+        margin-left: 5px;
       }
     }
   }
 }
 
+.main-content article {
+  @extend %layout-columns;
+
+  >aside {
+    @extend %layout-column;
+    width: $meta-width;
+  }
+
+  >.content {
+    @extend %layout-column;
+    width: $true-width;
+  }
+}
+
+.content .p_image_embed {
+  $size: $base-lead * 4;
+  $num-per-row: floor(($true-width + $g-gutter-size) / ($size + $g-gutter-size));
+  @extend %layout-grid;
+
+  img {
+    @extend %layout-grid-item;
+    width: $size;
+
+    &:nth-child(#{$num-per-row}n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.root-footer>.inner {
+  @extend %layout-columns;
+  @extend %layout-wrapper-slice;
+  width: $full-width;
+
+  >.main-content {
+    @extend %layout-column;
+    padding-left: $push-width;
+    width: $main-width;
+
+    @media only screen and (max-width: $width-1) {
+      padding-left: $push-width - $f-gutter-size;
+    }
+  }
+
+  >aside {
+    @extend %layout-column;
+    width: $side-width;
+  }
+}
+
+
+// section: non-grid-related
+
 .root-header {
   @extend %chrome-ruled;
   border-top: 1px solid darken($blue-1-dk, 20%);
   margin-bottom: $base-lead;
-  padding: { top: $base-lead; bottom: $base-lead; }
+  padding: { bottom: $base-lead; top: $base-lead; }
 }
+
 .banner {
   .about {
     @extend %type-copy-meta;
@@ -171,16 +193,16 @@ body {
     overflow: hidden;
     padding-right: $base-line;
   }
-  .logo {
-    .ir {
-      $height: 104px;
-      background-image: url(#{$_root}/banner-logo-sprite.png);
-      display: block;
-      height: $height;
-      width: 500px;
-      &:hover {
-        background-position: 0 (-$height);
-      }
+
+  .logo .ir {
+    $height: 104px;
+    background-image: url(#{$_root}/banner-logo-sprite.png);
+    display: block;
+    height: $height;
+    width: 500px;
+
+    &:hover {
+      background-position: 0 (-$height);
     }
   }
 }
@@ -189,17 +211,18 @@ body {
   @extend %stationery-inverted;
   @include border-side-radius(top, $radius-size);
   border: 1px solid;
-  border-color: shade(0.1) shade(0.2);
+  border-color: shade(.1) shade(.2);
   box-shadow: (
-    inset -1px 0 light(0.3), inset 1px 0 light(0.3),
-    inset 0 1px light(0.5),
-    inset 0 (-$base-line) $base-lead 5px shade(0.2),
-    0 5px 10px shade(0.2)
+    inset -1px 0 light(.3), inset 1px 0 light(.3),
+    inset 0 1px light(.5),
+    inset 0 (-$base-line) $base-lead 5px shade(.2),
+    0 5px 10px shade(.2)
   );
-  padding: { top: $base-lead; bottom: $base-lead * 2; }
   margin: ($base-lead * 2) $f-gutter-size;
   margin-bottom: 0;
+  padding: { bottom: $base-lead * 2; top: $base-lead; }
   text-shadow: 0 -1px shade(1);
+
   .colophon {
     @extend %type-copy-meta;
   }
@@ -209,19 +232,22 @@ body {
   @extend %type-heading;
   color: $gray-dk-2;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=hIEfix.png,sizingMethod=crop);
-  margin-bottom: 0.15em;
+  margin-bottom: .15em;
   text-shadow: 0 1px shade(1);
   zoom: 1;
 }
-h1, %type-h1 {
-  letter-spacing: -0.02em;
+
+%type-h1,
+h1 {
+  letter-spacing: -.02em;
 }
-h2, %type-h2 {
-  letter-spacing: -0.02em;
+
+%type-h2,
+h2 {
+  letter-spacing: -.02em;
 }
-$h_sizes: 34px 24px 20px 18px 16px;
-$h_leads: 44px 33px 22px 22px 22px;
-@for $i from 1 through 5{
+
+@for $i from 1 through 5 {
   #{h}#{$i}, %type-h#{$i} {
     font-size: nth($h_sizes, $i);
     line-height: nth($h_leads, $i);
@@ -229,30 +255,36 @@ $h_leads: 44px 33px 22px 22px 22px;
   }
 }
 
-ul, ol {
+ul,
+ol {
   margin-left: 0;
   padding-left: 0;
+
   nav:not(.bar) > &,
   &.posts, &.modules {
     @extend %layout-box-list;
   }
+
   &.posts, &.modules {
     >li:not(:last-child) {
       @extend %chrome-ruled;
       padding-bottom: $base-line;
     }
   }
+
   nav.bar > & {
     @extend %chrome-segmented;
     @extend %layout-bar-list;
   }
 }
 
-// Post content.
+// section: post content
+
 p {
   @extend %layout-box-slice;
   word-spacing: 2px;
-  &[data-annotation]{
+
+  &[data-annotation] {
     &::after {
       @extend %type-copy-meta;
       content: attr(data-annotation);
@@ -260,22 +292,29 @@ p {
       margin-top: $base-line;
       text-align: right;
     }
+
     li > & {
       text-align: right;
-      > img { display: inline-block; }
+    }
+
+    li > & > img {
+      display: inline-block;
     }
   }
 }
+
 pre {
   @extend %layout-box-slice;
   @extend %type-code;
   @extend %stationery-screen;
   padding: $base-line;
 }
+
 code {
   @extend %type-code;
   margin: 0;
   padding: 0;
+
   p & {
     @extend %chrome-inline-token;
   }
@@ -289,68 +328,83 @@ code {
   margin: { left: auto; right: auto; }
   padding: 0;
   word-spacing: 3px;
+
   span {
     @extend %stationery-ruled;
     background: {
-      size: $lead $lead;
       position: 0 $lead;
+      size: $lead $lead;
     }
-    padding-top: 0.3em;
+    padding-top: .3em;
   }
+
   +p:last-child {
     margin-top: 0;
   }
 }
+
 blockquote {
   @extend .blockquote;
 }
+
 object,
 img.framed {
   @extend %chrome-frame;
   display: block;
+
   .content & {
     max-width: 100%;
   }
 }
+
 .has-expandable {
   $size: $base-line;
   cursor: pointer;
   position: relative;
+
   &::before {
     @extend %chrome-overlay;
     @extend %type-glyph;
     @extend %transition-fading;
     border-radius: $size / 2;
     bottom: $size;
-    content: "\f0b2";
+    content: '\f0b2';
     height: $size;
     left: $size;
-    opacity: 0.2;
+    opacity: .2;
     padding: $size / 2;
     position: absolute;
     text-align: center;
     width: $size;
+
     .content:hover & {
       opacity: 1;
     }
   }
+
   &[data-annotation]::before {
     bottom: $size + ($base-lead + $base-line);
   }
+
   >img {
     @extend %chrome-frame-selectable;
   }
 }
+
 .posts {
-  ul, ol {
+  ul,
+  ol {
     @extend %layout-box-slice;
   }
+
   >li {
     @extend %layout-page-slice;
   }
 }
+
 dl {
   margin-top: $base-lead;
+
   dd {
     margin-bottom: $base-lead;
   }
@@ -362,24 +416,29 @@ a:not(.button) {
 
 .field {
   display: inline-block;
+
   &.input {
     @extend %chrome-field;
   }
 }
+
 input[type='submit'],
 .button {
   @extend %type-control;
   @extend %chrome-button;
+
   &>span[class^=icon] {
     vertical-align: middle;
   }
 }
+
 button {
   @extend %type-control;
   @extend %chrome-button;
   margin: 0;
   overflow: visible;
 }
+
 .modules {
   >li {
     >.title {
@@ -387,38 +446,37 @@ button {
     }
   }
 }
-.post {
-  >.meta-info {
-    padding-top: $base-lead;
-    text-align: right;
-    .date {
-      font-style: italic;
-      >a {
-        color: $gray-dk-3;
-      }
-    }
-    .tags {
 
+.post>.meta-info {
+  padding-top: $base-lead;
+  text-align: right;
+  .date {
+    font-style: italic;
+    >a {
+      color: $gray-dk-3;
     }
   }
-  >.content {
-    .title {
-      margin-bottom: $base-line;
-    }
-    .body {
-
-    }
-  }
+  // .tags {}
 }
+
+.post>.content {
+  .title {
+    margin-bottom: $base-line;
+  }
+  // .body {}
+}
+
 .quote-post,
 .text-post {
   >.content {
     @extend %layout-box-slice;
+
     >.body {
       @extend %layout-content-box;
     }
   }
 }
+
 .photo-post {
   >.content {
     >figure img {
@@ -426,47 +484,45 @@ button {
     }
   }
 }
-.video-post {
 
-}
-.audio-post {
+// .video-post {}
+// .audio-post {}
+// .link-post {}
 
-}
-.link-post {
+.chat-post>.content>ol.body {
+  $handle-width: 100px;
+  @extend %layout-meta-list;
+  @extend %stationery-ruled-list;
 
-}
-.chat-post {
-  >.content {
-    $handle-width: 100px;
-    >ol.body {
-      @extend %layout-meta-list;
-      @extend %stationery-ruled-list;
-      >li {
-        @extend %layout-columns;
-        >span {
-          display: block;
-        }
-        >.handle {
-          @extend %default-truncated-text;
-          color: $gray-lt-1;
-          float: left;
-          text-align: right;
-          width: $handle-width;
-        }
-        >.message {
-          display: block;
-          padding-left: $handle-width + $base-line;
-        }
-      }
+  >li {
+    @extend %layout-columns;
+
+    >span {
+      display: block;
+    }
+
+    >.handle {
+      @extend %default-truncated-text;
+      color: $gray-lt-1;
+      float: left;
+      text-align: right;
+      width: $handle-width;
+    }
+
+    >.message {
+      display: block;
+      padding-left: $handle-width + $base-line;
     }
   }
 }
 
 .p_image_embed {
   @extend %behavior-fading;
+
   img {
     @extend %chrome-frame-selectable;
   }
+
   &:first-child {
     margin-top: $base-line;
   }
@@ -474,23 +530,29 @@ button {
 
 .pagination {
   @extend %clearfix;
+
   >* {
     display: block;
   }
+
   .bar {
     float: left;
-    ul, ol {
-      margin: { top: 0; bottom: 0; }
+
+    ul,
+    ol {
+      margin: { bottom: 0; top: 0; }
     }
   }
+
   .label {
     @extend %type-copy-meta;
     float: right;
     line-height: 30px;
     margin-right: 10px;
   }
+
   .main-content &>* {
-    margin: { top: $base-lead; bottom: $base-lead; }
+    margin: { bottom: $base-lead; top: $base-lead; }
   }
 }
 
@@ -506,4 +568,4 @@ button {
   }
 }
 
-@import "imports/print";
+@import 'imports/print';
