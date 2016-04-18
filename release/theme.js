@@ -6,7 +6,7 @@
     $tpl = $(this);
     name = $tpl.attr('id');
     html = $(this).html();
-    return $("[data-tpl=" + name + "]").html(html);
+    $("[data-tpl=" + name + "]").html(html);
   });
 
   $snips = $('.root-header .about p:not(:empty)');
@@ -15,7 +15,7 @@
     var rand;
     rand = parseInt(Math.random() * $snips.length, 10);
     $snips.hide().eq(rand - 1).show().end();
-    return setTimeout($snips.showRandom, 10 * 1000);
+    setTimeout($snips.showRandom, 10 * 1000);
   };
 
   $snips.showRandom();
@@ -24,13 +24,12 @@
 
   r_framing_in_attr = /^\[(.*)\]$/;
 
-  $(function() {
-    var $galleries, $image, expandable, num_per_row;
-    expandable = function(extraOpts) {
+  $.fn.expandableImages = function(extraOpts) {
+    if (!$.isPlainObject(extraOpts)) {
+      extraOpts = {};
+    }
+    return this.each(function() {
       var $img, alt_text, has_original, hd_src;
-      if (!$.isPlainObject(extraOpts)) {
-        extraOpts = {};
-      }
       $img = $(this);
       has_original = $img.is('[alt^="http"]');
       alt_text = $img.attr('alt');
@@ -46,76 +45,93 @@
           hd_src = $img.attr('src');
         }
       }
-      return $img.parent().addClass('has-expandable').on('click', function() {
-        return Tumblr.Lightbox.init([
+      $img.parent().addClass('has-expandable').on('click', function() {
+        Tumblr.Lightbox.init([
           $.extend({}, extraOpts, {
             high_res: hd_src,
             low_res: $img.attr('src')
           })
         ], 1);
-      }).end();
-    };
-    $('.text-post .body').find('img.framed[alt], img[alt^="["][alt$="]"]').filter(':not([alt^="http"])').each(function() {
+      });
+    });
+  };
+
+  $.fn.conditionallyExpandableImages = function() {
+    return this.each(function() {
       var $img;
       $img = $(this);
       if (!$img.hasClass('framed')) {
         $img.addClass('framed').attr('alt', $img.attr('alt').replace(r_framing_in_attr, '$1'));
       }
       $img.parent('p').attr('data-annotation', $img.attr('alt'));
-      return $('<img>').on('load', function() {
+      $('<img>').attr('src', $img.attr('src')).on('load', function() {
         var $el;
         $el = $(this);
         if ($el.prop('width') > $img.width()) {
-          return expandable.apply($img, {
+          $img.expandableImages({
             width: $el.prop('width'),
             height: $el.prop('height')
           });
         }
-      }).attr('src', $img.attr('src'));
-    }).end().filter('[alt^="http"]').each(expandable).end().end().find('object, embed').filter('[width]').each(function() {
-      var $el;
+      });
+    });
+  };
+
+  $.fn.expandableGalleries = function() {
+    var $image, num_per_row;
+    $image = this.children().first();
+    num_per_row = this.first().width() / $image.width();
+    this.filter(function() {
+      return $(this).children().length > num_per_row;
+    }).each(function() {
+      var $el, completeInit;
       $el = $(this);
-      return $el.prop('width', '100%').filter('object').height($el.prop('height'));
-    }).end();
-    $('.posts').find('blockquote:not(:has(span))').wrapInner('<span>').end();
-    $galleries = $('.p_image_embed');
-    if ($galleries.length) {
-      $image = $galleries.children().first();
-      num_per_row = $galleries.first().width() / $image.width();
-      $galleries.filter(function() {
-        return $(this).children().length > num_per_row;
-      }).each(function() {
-        var $el;
-        return $el = $(this).addClass('invisible').imagesLoaded(function() {
-          return $el.removeClass('invisible').masonry({
-            itemSelector: 'a, img',
-            columnWidth: $image.outerWidth(),
-            gutterWidth: parseInt($image.css('margin-right'), 10)
-          });
+      completeInit = function() {
+        $el.removeClass('invisible').masonry({
+          itemSelector: 'a, img',
+          columnWidth: $image.outerWidth(),
+          gutterWidth: parseInt($image.css('margin-right'), 10)
         });
-      }).end().each(function() {
-        var $el, images;
-        $el = $(this);
-        images = $el.find('img').map(function() {
-          var $img;
-          $img = $(this);
-          return {
-            high_res: $img.attr('alt') || $img.attr('src'),
-            low_res: $img.attr('src')
-          };
-        });
-        return $el.find('img').each(function(idx) {
-          var $img;
-          $img = $(this);
-          return $img.on('click', function(e) {
-            var position;
-            position = idx + 1;
-            Tumblr.Lightbox.init(images, position);
-            return e.preventDefault();
-          });
+      };
+      $el.addClass('invisible').imagesLoaded(completeInit);
+    });
+    this.each(function() {
+      var $el, images;
+      $el = $(this);
+      images = $el.find('img').map(function() {
+        var $img;
+        $img = $(this);
+        return {
+          high_res: $img.attr('alt') || $img.attr('src'),
+          low_res: $img.attr('src')
+        };
+      });
+      $el.find('img').each(function(idx) {
+        var $img;
+        $img = $(this);
+        $img.on('click', function(e) {
+          var position;
+          position = idx + 1;
+          Tumblr.Lightbox.init(images, position);
+          e.preventDefault();
         });
       });
-    }
+    });
+    return this;
+  };
+
+  $.fn.framedEmbeds = function() {
+    return this.each(function() {
+      var $el;
+      $el = $(this);
+      $el.prop('width', '100%').filter('object').height($el.prop('height'));
+    });
+  };
+
+  $(function() {
+    $('.text-post .body').find('img.framed[alt], img[alt^="["][alt$="]"]').filter(':not([alt^="http"])').conditionallyExpandableImages().end().filter('[alt^="http"]').expandableImages().end().end().find('object, embed').filter('[width]').framedEmbeds().end().end();
+    $('.p_image_embed').expandableGalleries();
+    $('.posts').find('blockquote:not(:has(span))').wrapInner('<span>').end();
   });
 
 }).call(this);
