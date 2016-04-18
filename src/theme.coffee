@@ -114,9 +114,3 @@ $ ->
             position = idx + 1
             Tumblr.Lightbox.init(images, position)
             e.preventDefault()
-  # For others.
-  $('.button')
-    # Laziness.
-    .filter('.social>nav a')
-      .attr('target', 'blank')
-    .end()

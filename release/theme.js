@@ -116,7 +116,6 @@
         });
       });
     }
-    return $('.button').filter('.social>nav a').attr('target', 'blank').end();
   });
 
 }).call(this);
