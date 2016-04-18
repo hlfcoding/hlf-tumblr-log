@@ -373,14 +373,13 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/2.1.07/jquery.masonry.min.js"></script>
     <script>
-    if (typeof Tumblr == 'undefined')
-    {
+    if (typeof Tumblr === 'undefined') {
       document.write(unescape("%3Cscript src='//assets.tumblr.com/javascript/tumblelog.js' %3E%3C/script%3E"));
     }
     </script>
     <script src="{text:Theme Storage URL}/theme.js"></script>
     {block:IfDisqusShortname}
-    <script type="text/javascript">
+    <script>
     (function () {
     var s = document.createElement('script'); s.async = true;
     s.type = 'text/javascript';
@@ -388,10 +387,9 @@
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
     </script>
-    </script>
     {/block:IfDisqusShortname}
     {block:IfGoogleAnalyticsID}
-    <script type="text/javascript">
+    <script>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '{text:Google Analytics ID}']);
     _gaq.push(['_trackPageview']);
