@@ -20,7 +20,7 @@ module.exports = (grunt) ->
       release:
         expand: yes
         cwd: 'release'
-        src: '*.{css,js}'
+        src: '*'
         dest: 'main/blog/'
     bump:
       options:
@@ -45,8 +45,10 @@ module.exports = (grunt) ->
         dest: 'release/theme.js'
     copy:
       lib:
-        src: 'lib/hlf-css/_helpers.scss'
-        dest: 'release/helpers.css'
+        files: [
+          { src: 'lib/hlf-css/_helpers.scss', dest: 'release/helpers.css' }
+          { expand: yes, cwd: 'lib/hlf-css/', src: '{fontawesome,FontAwesome}*', dest: 'release/' }
+        ]
     sass:
       src:
         src: 'src/theme.scss'
