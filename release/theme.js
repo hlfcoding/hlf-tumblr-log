@@ -92,7 +92,7 @@
         $el.removeClass('invisible').masonry({
           itemSelector: 'a, img',
           columnWidth: $image.outerWidth(),
-          gutterWidth: parseInt($image.css('margin-right'), 10)
+          gutter: parseInt($image.css('margin-right'), 10)
         });
       };
       $el.addClass('invisible').imagesLoaded(completeInit);

@@ -94,7 +94,7 @@ $.fn.expandableGalleries = ->
         .masonry
           itemSelector: 'a, img'
           columnWidth: $image.outerWidth()
-          gutterWidth: parseInt($image.css('margin-right'), 10)
+          gutter: parseInt($image.css('margin-right'), 10)
       return
     $el
       .addClass('invisible')
