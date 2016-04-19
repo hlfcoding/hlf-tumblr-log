@@ -1,6 +1,5 @@
 $_weight: '#html';
 $_headings: 'h1, h2, h3, h4, h5, h6';
-$_root: '//pengxwang.s3.amazonaws.com/main/blog';
 
 $base-line:     14px;
 $base-lead:     22px;
@@ -60,12 +59,11 @@ $gray-dk-3:     #777;
   }
 }
 
-$_fontawesome-path: '#{$_root}/../font';
 @import '../lib/hlf-css/fontawesome';
 
 body {
   @extend %type-copy;
-  background: $white-1 url(#{$_root}/gradient.jpg) 0 -50px repeat-x fixed;
+  background: $white-1 url(gradient.jpg) 0 -50px repeat-x fixed;
   border-top: $ribbon-size solid $blue-1-dk;
   color: $black-1;
 }
@@ -199,7 +197,7 @@ body {
 
   .logo .ir {
     $height: 104px;
-    background-image: url(#{$_root}/banner-logo-sprite.png);
+    background-image: url(banner-logo-sprite.png);
     display: block;
     height: $height;
     width: 500px;
