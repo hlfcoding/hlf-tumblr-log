@@ -102,10 +102,12 @@
         var $img;
         $img = $(this);
         return {
+          height: $img.data('height'),
           high_res: $img.attr('alt') || $img.attr('src'),
-          low_res: $img.attr('src')
+          low_res: $img.attr('src'),
+          width: $img.data('width')
         };
-      });
+      }).get();
       $el.find('img').each(function(idx) {
         var $img;
         $img = $(this);

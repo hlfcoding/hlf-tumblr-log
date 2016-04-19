@@ -101,10 +101,14 @@ $.fn.expandableGalleries = ->
   # Use default lightbox.
   @each ->
     $el = $(@)
-    images = $el.find('img').map ->
-      $img = $(@)
-      high_res: $img.attr('alt') || $img.attr('src')
-      low_res: $img.attr('src')
+    images = $el.find('img')
+      .map ->
+        $img = $(@)
+        height: $img.data('height')
+        high_res: $img.attr('alt') || $img.attr('src')
+        low_res: $img.attr('src')
+        width: $img.data('width')
+      .get()
     $el.find('img').each (idx) ->
       $img = $(@)
       $img.on 'click', (e) ->
