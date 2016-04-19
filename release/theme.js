@@ -47,10 +47,12 @@
       }
       $img.parent().addClass('has-expandable').on('click', function() {
         Tumblr.Lightbox.init([
-          $.extend({}, extraOpts, {
+          $.extend({}, {
+            height: $img.data('height'),
             high_res: hd_src,
-            low_res: $img.attr('src')
-          })
+            low_res: $img.attr('src'),
+            width: $img.data('width')
+          }, extraOpts)
         ], 1);
       });
     });

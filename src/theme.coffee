@@ -49,9 +49,12 @@ $.fn.expandableImages = (extraOpts) ->
       .addClass('has-expandable')
       .on 'click', ->
         Tumblr.Lightbox.init [
-          $.extend {}, extraOpts,
+          $.extend {},
+            height: $img.data('height')
             high_res: hd_src
             low_res: $img.attr('src')
+            width: $img.data('width')
+          , extraOpts
         ], 1
         return
     return
