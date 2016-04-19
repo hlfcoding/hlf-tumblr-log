@@ -33,22 +33,27 @@ Being not yet submitted to Tumblr, usage is done via:
 
 ### Images
 
-- The `alt` attr for `framed` images will be displayed as an annotation.
-  - If that image is shrunken, it will have a full-screen icon expand to
-    tumblr-lightbox.
+- Text posts can have banner images that can be `framed` (class) and
+  `has-expandable` (parent class).
+  - The `alt` attr for `framed` images will be displayed as an annotation.
+  - If that image is shrunken to fit the post width, it will have a full-screen
+    icon expand to tumblr-lightbox.
+  - The `alt` attr can also contain a full-size url, but `data-width` and
+    `data-height` attributes must be included for proper expansion.
   - Wrapping an `[]` around the alt text automatically adds `framed` to the
     image. Useful for Markdown.
   - Include the original source within an `()` at the end to show it during
     expansion. Useful for Markdown.
 
-- Text posts, esp. legacy ones, have embedded galleries. When these galleries go
-  past one row, Masonry is used for layout.
+- Text posts have embedded galleries. When these galleries go past one row,
+  Masonry is used for layout.
+  - Images should store thumbnail urls in their `src`, and full-size urls in `alt`.
+    `data-width` and `data-height` are also needed for tumblr-lightbox to work.
 
 ### Other
 
 - Editing should happen in the Markdown-editor.
 - Fancy blockquotes require a nested `span`.
-- Embedded legacy images require the `alt` attribute to be the full-size src.
 
 ## License
 
