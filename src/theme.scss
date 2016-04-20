@@ -11,9 +11,8 @@ $meta-size:     12px;
 $g-gutter-size: $base-line; // Grid.
 $f-gutter-size: 13px; // Root footer.
 
-// TODO: Refactor with a map.
-$h_sizes:       34px 24px 20px 18px 16px;
-$h_leads:       44px 33px 22px 22px 22px;
+$h-sizes:       ('h1': 34px, 'h2': 24px, 'h3': 20px, 'h4': 18px, 'h5': 16px);
+$h-leads:       ('h1': 44px, 'h2': 33px, 'h3': 22px, 'h4': 22px, 'h5': 22px);
 
 // Grid.
 $width-1:       980px;
@@ -274,10 +273,10 @@ h2 {
   letter-spacing: -.02em;
 }
 
-@for $i from 1 through 5 {
-  #{h}#{$i}, %type-h#{$i} {
-    font-size: nth($h_sizes, $i);
-    line-height: nth($h_leads, $i);
+@each $header, $size in $h-sizes {
+  #{$header}, %type-#{$header} {
+    font-size: $size;
+    line-height: map-get($h-leads, $header);
     margin: 0;
   }
 }
@@ -352,7 +351,7 @@ code {
   @extend %type-quoted;
   @extend %type-h4;
   @extend %layout-content-box;
-  $lead: round(1.5 * nth($h_sizes, 4));
+  $lead: round(1.5 * map-get($h-sizes, 'h4'));
   line-height: $lead;
   margin: { left: auto; right: auto; }
   padding: 0;

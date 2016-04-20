@@ -27,7 +27,7 @@ rFramingInAttr = /^\[(.*)\]$/
 # Expand as needed. Use default lightbox.
 $.fn.expandableImages = (extraOpts) ->
   extraOpts = {} unless $.isPlainObject(extraOpts)
-  @.each -> 
+  @.each ->
     $img = $(@)
     # Use original, high-res source if provided.
     hasOriginal = $img.is('[alt^="http"]')
