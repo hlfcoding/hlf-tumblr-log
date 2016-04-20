@@ -486,14 +486,14 @@ pre, code {
     .no-fontface .blockquote::after, .no-fontface blockquote::after {
       font-weight: bold; }
 
-a:not(.button) {
+a:not(.button), a.button {
   color: #06f;
   font-weight: 500;
   text-decoration: none;
   transition: color .3s ease-in-out; }
-  .body a:not(.button), nav a:not(.button) {
+  .body a:not(.button), .body a.button, nav a:not(.button), nav a.button {
     text-shadow: 0 1px white; }
-  a:hover:not(.button), a:focus:not(.button), a:active:not(.button) {
+  a:hover:not(.button), a.button:hover, a:focus:not(.button), a.button:focus, a:active:not(.button), a.button:active {
     color: #08f; }
 
 input[type='submit'],

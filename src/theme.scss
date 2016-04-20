@@ -443,6 +443,10 @@ button {
   overflow: visible;
 }
 
+a.button { // specific
+  @extend %type-link;
+}
+
 .modules {
   >li {
     >.title {
