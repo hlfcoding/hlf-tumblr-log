@@ -72,6 +72,7 @@ body {
   color: $black-1;
   margin: { bottom: $ribbon-size; top: $ribbon-size; }
   min-width: $full-width + $g-gutter-size;
+  overflow-x: hidden;
 }
 
 // section: grid-related
@@ -217,21 +218,40 @@ body {
 .root-footer {
   @extend %stationery-inverted;
   @include border-side-radius(top, $radius-size);
-  border: 1px solid;
-  border-color: shade(.1) shade(.2);
+  border: {
+    color: shade(.1) shade(.2);
+    style: solid;
+    width: 1px 1px 0;
+  }
   box-shadow: (
     inset -1px 0 light(.3), inset 1px 0 light(.3),
-    inset 0 1px light(.5),
-    inset 0 (-$base-line) $base-lead 5px shade(.2),
-    0 5px 10px shade(.2)
+    inset 0 1px light(.5)
   );
   margin: ($base-lead * 2) $f-gutter-size;
   margin-bottom: 0;
   padding: { bottom: $base-lead * 2; top: $base-lead; }
+  position: relative;
   text-shadow: 0 -1px shade(1);
 
   .colophon {
     @extend %type-copy-meta;
+  }
+
+  &::before,
+  &::after {
+    @extend %stationery-inverted;
+    bottom: 0;
+    box-shadow: 0 1px 0 light(.3);
+    content: '';
+    height: 1px;
+    position: absolute;
+    width: $f-gutter-size;
+  }
+  &::before {
+    left: -($f-gutter-size + 1px);
+  }
+  &::after {
+    right: -($f-gutter-size + 1px);
   }
 }
 
