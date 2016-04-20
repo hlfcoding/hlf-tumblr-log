@@ -21,8 +21,8 @@ $snips.showRandom = ->
 $snips.showRandom()
 
 # Regexps.
-r_original_in_attr = /\((https?:\/\/.*)\)$/
-r_framing_in_attr = /^\[(.*)\]$/
+rOriginalInAttr = /\((https?:\/\/.*)\)$/
+rFramingInAttr = /^\[(.*)\]$/
 
 # Expand as needed. Use default lightbox.
 $.fn.expandableImages = (extraOpts) ->
@@ -30,22 +30,22 @@ $.fn.expandableImages = (extraOpts) ->
   @.each -> 
     $img = $(@)
     # Use original, high-res source if provided.
-    has_original = $img.is('[alt^="http"]')
-    alt_text = $img.attr('alt')
-    if has_original is yes
-      hd_src = alt_text
+    hasOriginal = $img.is('[alt^="http"]')
+    altText = $img.attr('alt')
+    if hasOriginal
+      highResSrc = altText
     else
-      has_original = alt_text.match r_original_in_attr
-      if has_original? and has_original.length
+      hasOriginal = altText.match rOriginalInAttr
+      if hasOriginal? and hasOriginal.length
         # Handle compound alt text.
-        hd_src = has_original[1]
-        alt_text = alt_text.replace(r_original_in_attr, '')
+        highResSrc = hasOriginal[1]
+        altText = altText.replace(rOriginalInAttr, '')
         $img
-          .attr('alt', alt_text)
-          .closest('[data-annotation]').attr('data-annotation', alt_text)
+          .attr('alt', altText)
+          .closest('[data-annotation]').attr('data-annotation', altText)
       else
         # Handle single-source images.
-        hd_src = $img.attr('src')
+        highResSrc = $img.attr('src')
     # Setup.
     $img.parent()
       .addClass('has-expandable')
@@ -53,7 +53,7 @@ $.fn.expandableImages = (extraOpts) ->
         Tumblr.Lightbox.init [
           $.extend {},
             height: $img.data('height')
-            high_res: hd_src
+            high_res: highResSrc
             low_res: $img.attr('src')
             width: $img.data('width')
           , extraOpts
@@ -68,7 +68,7 @@ $.fn.conditionallyExpandableImages = ->
     unless $img.hasClass('framed')
       $img
         .addClass('framed')
-        .attr('alt', $img.attr('alt').replace r_framing_in_attr, '$1' )
+        .attr('alt', $img.attr('alt').replace rFramingInAttr, '$1' )
     # Annotate certain images.
     $img.parent('p').attr('data-annotation', $img.attr 'alt' )
     # Expand those needing expansion, and with correct dimensions.
@@ -85,10 +85,10 @@ $.fn.conditionallyExpandableImages = ->
 
 $.fn.expandableGalleries = ->
   $image = @children().first()
-  num_per_row = @first().width() / $image.width()
+  numPerRow = @first().width() / $image.width()
 
   # Masonry support for big grids.
-  @filter(-> $(@).children().length > num_per_row).each ->
+  @filter(-> $(@).children().length > numPerRow).each ->
     $el = $(@)
     completeInit = ->
       $el

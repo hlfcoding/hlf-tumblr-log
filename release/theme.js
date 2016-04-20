@@ -1,5 +1,5 @@
 (function() {
-  var $snips, r_framing_in_attr, r_original_in_attr;
+  var $snips, rFramingInAttr, rOriginalInAttr;
 
   $('script[type="text/x-tpl-html"]').each(function() {
     var $tpl, html, name;
@@ -20,36 +20,36 @@
 
   $snips.showRandom();
 
-  r_original_in_attr = /\((https?:\/\/.*)\)$/;
+  rOriginalInAttr = /\((https?:\/\/.*)\)$/;
 
-  r_framing_in_attr = /^\[(.*)\]$/;
+  rFramingInAttr = /^\[(.*)\]$/;
 
   $.fn.expandableImages = function(extraOpts) {
     if (!$.isPlainObject(extraOpts)) {
       extraOpts = {};
     }
     return this.each(function() {
-      var $img, alt_text, has_original, hd_src;
+      var $img, altText, hasOriginal, highResSrc;
       $img = $(this);
-      has_original = $img.is('[alt^="http"]');
-      alt_text = $img.attr('alt');
-      if (has_original === true) {
-        hd_src = alt_text;
+      hasOriginal = $img.is('[alt^="http"]');
+      altText = $img.attr('alt');
+      if (hasOriginal) {
+        highResSrc = altText;
       } else {
-        has_original = alt_text.match(r_original_in_attr);
-        if ((has_original != null) && has_original.length) {
-          hd_src = has_original[1];
-          alt_text = alt_text.replace(r_original_in_attr, '');
-          $img.attr('alt', alt_text).closest('[data-annotation]').attr('data-annotation', alt_text);
+        hasOriginal = altText.match(rOriginalInAttr);
+        if ((hasOriginal != null) && hasOriginal.length) {
+          highResSrc = hasOriginal[1];
+          altText = altText.replace(rOriginalInAttr, '');
+          $img.attr('alt', altText).closest('[data-annotation]').attr('data-annotation', altText);
         } else {
-          hd_src = $img.attr('src');
+          highResSrc = $img.attr('src');
         }
       }
       $img.parent().addClass('has-expandable').on('click', function() {
         Tumblr.Lightbox.init([
           $.extend({}, {
             height: $img.data('height'),
-            high_res: hd_src,
+            high_res: highResSrc,
             low_res: $img.attr('src'),
             width: $img.data('width')
           }, extraOpts)
@@ -63,7 +63,7 @@
       var $img;
       $img = $(this);
       if (!$img.hasClass('framed')) {
-        $img.addClass('framed').attr('alt', $img.attr('alt').replace(r_framing_in_attr, '$1'));
+        $img.addClass('framed').attr('alt', $img.attr('alt').replace(rFramingInAttr, '$1'));
       }
       $img.parent('p').attr('data-annotation', $img.attr('alt'));
       $('<img>').attr('src', $img.attr('src')).on('load', function() {
@@ -80,11 +80,11 @@
   };
 
   $.fn.expandableGalleries = function() {
-    var $image, num_per_row;
+    var $image, numPerRow;
     $image = this.children().first();
-    num_per_row = this.first().width() / $image.width();
+    numPerRow = this.first().width() / $image.width();
     this.filter(function() {
-      return $(this).children().length > num_per_row;
+      return $(this).children().length > numPerRow;
     }).each(function() {
       var $el, completeInit;
       $el = $(this);
