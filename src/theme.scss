@@ -62,11 +62,16 @@ $gray-dk-3:     #777;
 $_fontawesome-path: '.';
 @import '../lib/hlf-css/fontawesome';
 
+html {
+ background: $blue-1-dk;
+}
+
 body {
   @extend %type-copy;
   background: $white-1 url(gradient.jpg) 0 -50px repeat-x fixed;
-  border-top: $ribbon-size solid $blue-1-dk;
   color: $black-1;
+  margin: { bottom: $ribbon-size; top: $ribbon-size; }
+  min-width: $full-width + $g-gutter-size;
 }
 
 // section: grid-related

@@ -1852,10 +1852,15 @@ p code {
 .icon-renren:before {
   content: "\f18b"; }
 
+html {
+  background: #05d; }
+
 body {
   background: #f1f1f1 url(gradient.jpg) 0 -50px repeat-x fixed;
-  border-top: 6px solid #05d;
-  color: #221; }
+  color: #221;
+  margin-bottom: 6px;
+  margin-top: 6px;
+  min-width: 994px; }
 
 .root-header > section {
   width: 980px; }
