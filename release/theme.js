@@ -97,7 +97,7 @@
       };
       $el.addClass('invisible').imagesLoaded(completeInit);
     });
-    this.each(function() {
+    return this.each(function() {
       var $el, images;
       $el = $(this);
       images = $el.find('img').map(function() {
@@ -121,7 +121,6 @@
         });
       });
     });
-    return this;
   };
 
   $.fn.framedEmbeds = function() {

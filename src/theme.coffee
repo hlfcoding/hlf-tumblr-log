@@ -26,10 +26,10 @@ r_framing_in_attr = /^\[(.*)\]$/
 
 # Expand as needed. Use default lightbox.
 $.fn.expandableImages = (extraOpts) ->
-  if not $.isPlainObject(extraOpts) then extraOpts = {}
+  extraOpts = {} unless $.isPlainObject(extraOpts)
   @.each -> 
     $img = $(@)
-    # Use original src if provided.
+    # Use original, high-res source if provided.
     has_original = $img.is('[alt^="http"]')
     alt_text = $img.attr('alt')
     if has_original is yes
@@ -37,12 +37,14 @@ $.fn.expandableImages = (extraOpts) ->
     else
       has_original = alt_text.match r_original_in_attr
       if has_original? and has_original.length
+        # Handle compound alt text.
         hd_src = has_original[1]
         alt_text = alt_text.replace(r_original_in_attr, '')
         $img
           .attr('alt', alt_text)
           .closest('[data-annotation]').attr('data-annotation', alt_text)
       else
+        # Handle single-source images.
         hd_src = $img.attr('src')
     # Setup.
     $img.parent()
@@ -63,7 +65,7 @@ $.fn.conditionallyExpandableImages = ->
   @.each ->
     $img = $(@)
     # Auto-framing, for markdown posts.
-    if not $img.hasClass('framed')
+    unless $img.hasClass('framed')
       $img
         .addClass('framed')
         .attr('alt', $img.attr('alt').replace r_framing_in_attr, '$1' )
@@ -121,7 +123,6 @@ $.fn.expandableGalleries = ->
         return
       return
     return
-  @
 
 $.fn.framedEmbeds = ->
   @.each ->
