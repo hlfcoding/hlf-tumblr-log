@@ -97,7 +97,9 @@
   &:hover,
   &:focus {
     background-color: $bg-clr-on;
-    &.no-span, >span::before {
+
+    &.no-span,
+    >span::before {
       color: $fg-clr-on; // Otherwise won't work due to text-inset.
     }
   }
@@ -126,6 +128,7 @@
   >li:not(:first-child)>a {
     @include border-side-radius(left, 0);
   }
+
   >li:not(:last-child)>a {
     @include border-side-radius(right, 0);
     border-right-width: 0;
@@ -134,7 +137,7 @@
 
 %chrome-frame {
   background: shade(1);
-  border: { width: 1px; style: solid; color: $gray-lt-1; }
+  border: { color: $gray-lt-1; style: solid; width: 1px; }
   box-shadow: (
     0 5px $base-lead shade(.1),
     0 5px 5px shade(.1),
@@ -148,6 +151,7 @@
   @extend %chrome-frame;
   cursor: pointer;
   transition: border-color .3s ease-in-out;
+
   &:hover {
     border: { color: $blue-1-dk; width: $frame-size + 1px; }
     padding: 0;

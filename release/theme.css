@@ -394,10 +394,10 @@ body {
   text-shadow: none; }
 
 hr {
+  border-top: 1px solid #ccc;
+  border: 0;
   display: block;
   height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -413,9 +413,9 @@ textarea {
   resize: vertical; }
 
 .chromeframe {
-  margin: .2em 0;
   background: #ccc;
   color: #000;
+  margin: .2em 0;
   padding: .2em 0; }
 
 * {
@@ -659,10 +659,14 @@ input[type='submit'],
   .button:focus, button:focus {
     background-color: #f8f8f8; }
     input[type='submit']:hover.no-span,
-    .button:hover.no-span, button:hover.no-span, input[type='submit']:hover > span::before,
-    .button:hover > span::before, button:hover > span::before, input[type='submit']:focus.no-span,
-    .button:focus.no-span, button:focus.no-span, input[type='submit']:focus > span::before,
-    .button:focus > span::before, button:focus > span::before {
+    .button:hover.no-span, button:hover.no-span,
+    input[type='submit']:hover > span::before,
+    .button:hover > span::before,
+    button:hover > span::before, input[type='submit']:focus.no-span,
+    .button:focus.no-span, button:focus.no-span,
+    input[type='submit']:focus > span::before,
+    .button:focus > span::before,
+    button:focus > span::before {
       color: #08f; }
   input[type='submit']:active,
   .button:active, button:active {
@@ -684,9 +688,9 @@ ol > li:not(:last-child) > a {
 .has-expandable > img, .p_image_embed img, object,
 img.framed, .photo-post > .content > figure img {
   background: black;
-  border-width: 1px;
-  border-style: solid;
   border-color: #aaa;
+  border-style: solid;
+  border-width: 1px;
   box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1), 0 5px 5px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.3), inset 0 0 3px 5px rgba(255, 255, 255, 0.8);
   padding: 5px; }
 
@@ -1856,7 +1860,7 @@ html {
   background: #05d; }
 
 body {
-  background: #f1f1f1 url(gradient.jpg) 0 -50px repeat-x fixed;
+  background: #f1f1f1 url("gradient.jpg") 0 -50px repeat-x fixed;
   color: #221;
   margin-bottom: 6px;
   margin-top: 6px;
@@ -1922,7 +1926,7 @@ body {
   overflow: hidden;
   padding-right: 14px; }
 .banner .logo .ir {
-  background-image: url(banner-logo-sprite.png);
+  background-image: url("banner-logo-sprite.png");
   display: block;
   height: 104px;
   width: 500px; }

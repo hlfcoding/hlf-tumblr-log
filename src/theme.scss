@@ -53,6 +53,7 @@ $gray-dk-3:     #777;
 %behavior-fading {
   @extend %transition-fading;
   opacity: 1;
+
   &.invisible {
     opacity: 0;
   }
@@ -62,12 +63,12 @@ $_fontawesome-path: '.';
 @import '../lib/hlf-css/fontawesome';
 
 html {
- background: $blue-1-dk;
+  background: $blue-1-dk;
 }
 
 body {
   @extend %type-copy;
-  background: $white-1 url(gradient.jpg) 0 -50px repeat-x fixed;
+  background: $white-1 url('gradient.jpg') 0 -50px repeat-x fixed;
   color: $black-1;
   margin: { bottom: $ribbon-size; top: $ribbon-size; }
   min-width: $full-width + $g-gutter-size;
@@ -203,7 +204,7 @@ body {
 
   .logo .ir {
     $height: 104px;
-    background-image: url(banner-logo-sprite.png);
+    background-image: url('banner-logo-sprite.png');
     display: block;
     height: $height;
     width: 500px;
@@ -246,9 +247,11 @@ body {
     position: absolute;
     width: $f-gutter-size;
   }
+
   &::before {
     left: -($f-gutter-size + 1px);
   }
+
   &::after {
     right: -($f-gutter-size + 1px);
   }
@@ -347,6 +350,7 @@ code {
     @extend %chrome-inline-token;
   }
 }
+
 .blockquote {
   @extend %type-quoted;
   @extend %type-h4;
