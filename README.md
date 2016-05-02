@@ -2,6 +2,7 @@
 
 [![Package](https://img.shields.io/npm/v/hlf-tumblr-log.svg?style=flat)](https://www.npmjs.com/package/hlf-tumblr-log)
 [![Code Climate](https://codeclimate.com/github/hlfcoding/hlf-tumblr-log/badges/gpa.svg)](https://codeclimate.com/github/hlfcoding/hlf-tumblr-log)
+[![Dependency Status](https://david-dm.org/hlfcoding/hlf-tumblr-log/status.svg)](https://david-dm.org/hlfcoding/hlf-tumblr-log#info=dependencies)
 [![devDependency Status](https://david-dm.org/hlfcoding/hlf-tumblr-log/dev-status.svg)](https://david-dm.org/hlfcoding/hlf-tumblr-log#info=devDependencies)
 
 > :scroll: A light Tumblr blog theme with quality UI.
